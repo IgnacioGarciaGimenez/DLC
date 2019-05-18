@@ -112,7 +112,6 @@ public class Vocabulario {
         }
 
         String sql2 = sql.substring(0, sql.length() - 2);
-        System.out.println(sql2);
 
         try {
             PreparedStatement pstmt = GestorDB.connection.prepareStatement(sql2);
@@ -130,6 +129,15 @@ public class Vocabulario {
         }
     }
 
+    public void actuaizarReferenciaDePosteoAVocabulario() {
+        String sql = "UPDATE posteo SET vocabulario_ID = vocabulario_provisorio_ID";
+        try {
+            Statement stmt = GestorDB.connection.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

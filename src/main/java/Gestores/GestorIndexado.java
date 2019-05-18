@@ -32,6 +32,7 @@ public class GestorIndexado {
 
         vocabulario.agregarDocumento(new File("C:\\DocumentosTP1\\7linc11.txt"));
         vocabulario.guardarVocabulario();
+        vocabulario.actuaizarReferenciaDePosteoAVocabulario();
 
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
