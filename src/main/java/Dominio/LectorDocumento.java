@@ -37,7 +37,7 @@ public class LectorDocumento {
                     if (palabra.equals("")) continue;
                     if (palabrasArchivo.containsKey(palabra)) {
                         int repeticiones = palabrasArchivo.get(palabra);
-                        palabrasArchivo.put(palabra, repeticiones++);
+                        palabrasArchivo.put(palabra, ++repeticiones);
                     }
                     else {
                         palabrasArchivo.put(palabra, 1);

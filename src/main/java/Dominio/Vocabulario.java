@@ -6,7 +6,7 @@ import java.util.Hashtable;
 public class Vocabulario {
 
     private Hashtable<String, Termino> vocabulario;
-    public static Vocabulario instance = null;
+    private static Vocabulario instance = null;
     public String s = "";
 
     private Vocabulario() {
@@ -25,17 +25,10 @@ public class Vocabulario {
 
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
         Posteo posteo = Posteo.getInstance();
-        posteo.indexarDocumento(documentoParseado, file.getAbsolutePath());
+        posteo.indexarDocumento(documentoParseado, file.getAbsolutePath(), vocabulario);
 
-        documentoParseado.forEach((k, v) -> {
-            if (vocabulario.containsKey(k)) {
-                Termino term = vocabulario.get(k);
-                term.setCantArchivos(term.getCantArchivos() + 1);
-                if (term.getMaximaFrecuencia() < v)
-                    term.setMaximaFrecuencia(v);
-            }
-            vocabulario.put(k, new Termino(1, v));
-        });
+        /* TODO: acá estaba el for que cargaba el vocabulario, pero lo incluí en el método indexarDocumento
+        para aprovechar el for*/
     }
 
 

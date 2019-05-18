@@ -2,23 +2,23 @@ package Dominio;
 
 public class Termino {
 
-    private int cantArchivos;
+    private int cantDocumentos;
     private int maximaFrecuencia;
     private int indice;
 
 
 
-    public Termino(int cantArchivos, int maximaFrecuencia) {
-        this.cantArchivos = cantArchivos;
+    public Termino(int cantDocumentos, int maximaFrecuencia) {
+        this.cantDocumentos = cantDocumentos;
         this.maximaFrecuencia = maximaFrecuencia;
     }
 
-    public int getCantArchivos() {
-        return cantArchivos;
+    public int getCantDocumentos() {
+        return cantDocumentos;
     }
 
-    public void setCantArchivos(int cantArchivos) {
-        this.cantArchivos = cantArchivos;
+    public void setCantDocumentos(int cantDocumentos) {
+        this.cantDocumentos = cantDocumentos;
     }
 
     public int getMaximaFrecuencia() {
