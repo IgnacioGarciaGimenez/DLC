@@ -12,21 +12,23 @@ public class GestorIndexado {
         vocabulario = Vocabulario.getInstance();
     }
 
-    public static void main(String[] args) {
-        GestorIndexado gestor = new GestorIndexado();
-        gestor.indexar();
-    }
-
-
     public void indexar() {
+        long generalTimer = System.currentTimeMillis();
+        long timer = generalTimer;
         File carpeta = new File("C:\\DocumentosTP1");
-        System.out.println();
         File[] archivos = carpeta.listFiles();
-        for (File archivo : archivos) {
-            vocabulario.agregarDocumento(archivo);
+        if (archivos != null) {
+            for (int i = 0; i < archivos.length; i++) {
+                vocabulario.agregarDocumento(archivos[i]);
 
+                if (System.currentTimeMillis() - timer > 2000) {
+                    System.out.println("Indexando: " + i + " / " + archivos.length);
+                    timer = System.currentTimeMillis();
+                }
+            }
         }
 
+        System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
     }
 }

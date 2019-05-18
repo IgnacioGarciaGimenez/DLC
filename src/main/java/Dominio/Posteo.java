@@ -30,7 +30,7 @@ public class Posteo {
         this.posteos = posteos;
     }
 
-    public void indexarDocumento(Hashtable<String, Integer> parseo, String path, Hashtable<String, Termino> vocab) {
+    public void indexarDocumento(Hashtable<String, Integer> parseo, String path) {
         parseo.forEach((k, v) -> {
             EntradaPosteo entrada = new EntradaPosteo(path, v);
             if (posteos.containsKey(k)) {
@@ -42,17 +42,6 @@ public class Posteo {
                 listaEntradas.add(entrada);
                 posteos.put(k, listaEntradas);
             }
-
-            if (vocab.containsKey(k)) {
-                Termino term = vocab.get(k);
-                term.setCantDocumentos(term.getCantDocumentos() + 1);
-                if (term.getMaximaFrecuencia() < v)
-                    term.setMaximaFrecuencia(v);
-            }
-            else {
-                vocab.put(k, new Termino(1, v));
-            }
-
         });
     }
 }

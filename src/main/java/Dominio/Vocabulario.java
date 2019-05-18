@@ -25,10 +25,20 @@ public class Vocabulario {
 
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
         Posteo posteo = Posteo.getInstance();
-        posteo.indexarDocumento(documentoParseado, file.getAbsolutePath(), vocabulario);
+        posteo.indexarDocumento(documentoParseado, file.getAbsolutePath());
 
-        /* TODO: acá estaba el for que cargaba el vocabulario, pero lo incluí en el método indexarDocumento
-        para aprovechar el for*/
+        documentoParseado.forEach((k, v) -> {
+            if (vocabulario.containsKey(k)) {
+                Termino term = vocabulario.get(k);
+                term.setCantDocumentos(term.getCantDocumentos() + 1);
+                if (term.getMaximaFrecuencia() < v)
+                    term.setMaximaFrecuencia(v);
+            }
+            else {
+                vocabulario.put(k, new Termino(1, v));
+            }
+        });
+
     }
 
 
