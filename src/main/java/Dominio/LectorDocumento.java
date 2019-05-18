@@ -42,6 +42,7 @@ public class LectorDocumento {
                     else {
                         palabrasArchivo.put(palabra, 1);
                     }
+
                 }
             }
 

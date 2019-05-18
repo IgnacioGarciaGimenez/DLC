@@ -95,33 +95,41 @@ public class Vocabulario {
     }
 
     public void guardarVocabulario() {
-        Set<String> voc = vocabulario.keySet();
-        StringBuilder sql = new StringBuilder(5000);
-        sql.append("INSERT INTO vocabulario (vocabulario_ID, termino, cantDocumentos, maxFrecuencia) VALUES ");
-        for (String termino : voc) {
-            Termino t = vocabulario.get(termino);
-            int indice = t.getIndice();
-            int cantDocumentos = t.getCantDocumentos();
-            int maxFrecuencia = t.getMaximaFrecuencia();
-            sql.append("(").append(indice).append(", ?, ").append(cantDocumentos).append(", ").append(maxFrecuencia).append("), ");
-        }
+        String[] voc = vocabulario.keySet().toArray(new String[0]);
 
-        String sql2 = sql.substring(0, sql.length() - 2);
-
-        try {
-            PreparedStatement pstmt = GestorDB.connection.prepareStatement(sql2);
-
-            int i = 1;
-            for (String termino: voc) {
-                pstmt.setString(i, termino);
-                i++;
+        float division = (voc.length / 10000f);
+        for (int j = 0; j < division; j++) {
+            System.out.println("Vocabulario: " + ((j / division) * 100) + "%");
+            StringBuilder sql = new StringBuilder(200000);
+            sql.append("INSERT INTO vocabulario (vocabulario_ID, termino, cantDocumentos, maxFrecuencia) VALUES ");
+            for (int i = 10000 * j; i < (j + 1) * 10000 && i < voc.length; i++) {
+                String termino = voc[i];
+                Termino t = vocabulario.get(termino);
+                int indice = t.getIndice();
+                int cantDocumentos = t.getCantDocumentos();
+                int maxFrecuencia = t.getMaximaFrecuencia();
+                sql.append("(").append(indice).append(", ?, ").append(cantDocumentos).append(", ").append(maxFrecuencia).append("), ");
             }
 
-            pstmt.executeUpdate();
+            String sql2 = sql.substring(0, sql.length() - 2);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                PreparedStatement pstmt = GestorDB.connection.prepareStatement(sql2);
+
+                for (int i = 10000 * j; i < (j + 1) * 10000 && i < voc.length; i++) {
+                    String termino = voc[i];
+                    pstmt.setString(i + 1 - (10000 * j), termino);
+                }
+
+                pstmt.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+
+
     }
 
     public void actuaizarReferenciaDePosteoAVocabulario() {

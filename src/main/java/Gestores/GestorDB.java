@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GestorDB {
-    private static final String URL = "jdbc:mysql://localhost/dlcschema";
+    private static final String URL = "jdbc:mysql://localhost/dlc";
     private static final String USER = "root";
     private static final String PASS = "253614";
 
