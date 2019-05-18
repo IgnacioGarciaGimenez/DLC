@@ -1,5 +1,7 @@
 package Dominio;
 
+import Gestores.GestorDB;
+
 import java.io.File;
 import java.util.Hashtable;
 
@@ -19,6 +21,10 @@ public class Vocabulario {
         return instance;
     }
 
+    public Hashtable<String, Termino> getVocabulario() {
+        return vocabulario;
+    }
+
     public void agregarDocumento(File file) {
 
         LectorDocumento lector = new LectorDocumento(file);
@@ -26,6 +32,7 @@ public class Vocabulario {
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
         Posteo posteo = Posteo.getInstance();
         posteo.indexarDocumento(documentoParseado, file.getAbsolutePath());
+
 
         documentoParseado.forEach((k, v) -> {
             if (vocabulario.containsKey(k)) {
@@ -37,7 +44,10 @@ public class Vocabulario {
             else {
                 vocabulario.put(k, new Termino(1, v));
             }
+
         });
+
+
 
     }
 

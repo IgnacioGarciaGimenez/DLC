@@ -1,8 +1,10 @@
 package Gestores;
 
+import Dominio.Termino;
 import Dominio.Vocabulario;
 
 import java.io.File;
+import java.util.Hashtable;
 
 public class GestorIndexado {
 
@@ -14,7 +16,7 @@ public class GestorIndexado {
 
     public void indexar() {
         long generalTimer = System.currentTimeMillis();
-        long timer = generalTimer;
+        /*long timer = generalTimer;
         File carpeta = new File("C:\\DocumentosTP1");
         File[] archivos = carpeta.listFiles();
         if (archivos != null) {
@@ -26,7 +28,16 @@ public class GestorIndexado {
                     timer = System.currentTimeMillis();
                 }
             }
-        }
+        }*/
+
+        vocabulario.agregarDocumento(new File("C:\\DocumentosTP1\\7linc11.txt"));
+
+        Vocabulario v = Vocabulario.getInstance();
+        Hashtable<String, Termino> voc = v.getVocabulario();
+
+        /*for ()
+        String sql = "INSERT INTO Vocabulario VALUES (" +  +  ", " +  + ", " + + ", " + + ")";
+        GestorDB.statement("");*/
 
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
