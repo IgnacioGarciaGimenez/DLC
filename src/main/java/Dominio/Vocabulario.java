@@ -4,6 +4,7 @@ import Gestores.GestorDB;
 
 import java.io.File;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -32,37 +33,31 @@ public class Vocabulario {
 
     public void agregarDocumento(File file) {
 
+        int docId = -1;
+        String aaa = "SELECT documento_ID FROM documento WHERE ruta LIKE '" + file.getAbsolutePath() + "'";
+        try {
+            Statement statement1 = GestorDB.connection.createStatement();
+            ResultSet res = statement1.executeQuery(aaa);
+            if (res.next()) {
+                docId = res.getInt("documento_ID");
+            }
+            else {
+                String insert = "INSERT INTO documento (ruta) VALUES (?)";
+                // Agrega documento a la DB
+                PreparedStatement statement = GestorDB.connection.prepareStatement(insert,
+                        Statement.RETURN_GENERATED_KEYS);
+                statement.setString(1, file.getAbsolutePath());
+                docId = statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         LectorDocumento lector = new LectorDocumento(file);
 
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
         Posteo posteo = Posteo.getInstance();
         Hashtable<String, ArrayList<EntradaPosteo>> posteoDocumento = posteo.indexarDocumento(documentoParseado, file.getAbsolutePath());
-
-        /*
-        // Guardo vocabulario hasta el momento. Si hay duplicados se ignora. Solo se guarda el ID y nombre del término
-        Set<String> docParseadoSet = documentoParseado.keySet();
-        StringBuilder sql = new StringBuilder(5000);
-        sql.append("INSERT IGNORE INTO vocabulario (termino) VALUES ");
-        for (String termino : docParseadoSet) {
-            sql.append("(?), ");
-        }
-
-        String sql2 = sql.substring(0, sql.length() - 2);
-        try {
-            PreparedStatement pstmt = GestorDB.connection.prepareStatement(sql2);
-
-            int i = 1;
-            for (String termino: docParseadoSet) {
-                pstmt.setString(i, termino);
-                i++;
-            }
-
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-*/
 
         documentoParseado.forEach((k, v) -> {
             if (vocabulario.containsKey(k)) {
@@ -79,15 +74,15 @@ public class Vocabulario {
 
         // GUARDO EL POSTEO
         StringBuilder sql = new StringBuilder(5000000);
-        sql.append("INSERT INTO posteo (ruta, frecuencia, vocabulario_provisorio_ID) VALUES ");
+        sql.append("INSERT INTO posteo (documento_ID, frecuencia, vocabulario_provisorio_ID) VALUES ");
 
         Set<String> p = posteoDocumento.keySet();
         for (String t : p) {
-            posteoDocumento.get(t).forEach((e) -> {
+            for (EntradaPosteo e : posteoDocumento.get(t)) {
                 int indice = vocabulario.get(t).getIndice();
 
-                sql.append("('" + e.getRutaDocumento() + "', " + e.getApariciones() + ", " + indice + "), ");
-            });
+                sql.append("(" + docId + ", " + e.getApariciones() + ", " + indice + "), ");
+            }
         }
         String sql2 = sql.substring(0, sql.length() - 2);
 
