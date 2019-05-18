@@ -97,8 +97,37 @@ public class Vocabulario {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void guardarVocabulario() {
+        Set<String> voc = vocabulario.keySet();
+        StringBuilder sql = new StringBuilder(5000);
+        sql.append("INSERT INTO vocabulario (vocabulario_ID, termino, cantDocumentos, maxFrecuencia) VALUES ");
+        for (String termino : voc) {
+            Termino t = vocabulario.get(termino);
+            int indice = t.getIndice();
+            int cantDocumentos = t.getCantDocumentos();
+            int maxFrecuencia = t.getMaximaFrecuencia();
+            sql.append("(").append(indice).append(", ?, ").append(cantDocumentos).append(", ").append(maxFrecuencia).append("), ");
+        }
 
+        String sql2 = sql.substring(0, sql.length() - 2);
+        System.out.println(sql2);
+
+        try {
+            PreparedStatement pstmt = GestorDB.connection.prepareStatement(sql2);
+
+            int i = 1;
+            for (String termino: voc) {
+                pstmt.setString(i, termino);
+                i++;
+            }
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

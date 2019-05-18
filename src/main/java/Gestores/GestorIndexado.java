@@ -31,9 +31,7 @@ public class GestorIndexado {
         }*/
 
         vocabulario.agregarDocumento(new File("C:\\DocumentosTP1\\7linc11.txt"));
-
-        /*Vocabulario v = Vocabulario.getInstance();
-        Hashtable<String, Termino> voc = v.getVocabulario();*/
+        vocabulario.guardarVocabulario();
 
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
