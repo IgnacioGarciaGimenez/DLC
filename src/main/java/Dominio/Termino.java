@@ -2,6 +2,8 @@ package Dominio;
 
 public class Termino {
 
+    public static int PROV_INDICE = 0;
+
     private int cantDocumentos;
     private int maximaFrecuencia;
     private int indice;
@@ -11,6 +13,7 @@ public class Termino {
     public Termino(int cantDocumentos, int maximaFrecuencia) {
         this.cantDocumentos = cantDocumentos;
         this.maximaFrecuencia = maximaFrecuencia;
+        this.indice = ++PROV_INDICE;
     }
 
     public int getCantDocumentos() {

@@ -20,16 +20,4 @@ public class GestorDB {
             e.printStackTrace();
         }
     }
-
-    public static void statement(String sql) {
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 }

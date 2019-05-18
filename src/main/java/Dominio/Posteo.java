@@ -30,18 +30,22 @@ public class Posteo {
         this.posteos = posteos;
     }
 
-    public void indexarDocumento(Hashtable<String, Integer> parseo, String path) {
+    public Hashtable<String, ArrayList<EntradaPosteo>> indexarDocumento(Hashtable<String, Integer> parseo, String path) {
+        Hashtable<String, ArrayList<EntradaPosteo>> posteosDocumento = new Hashtable<>();
         parseo.forEach((k, v) -> {
             EntradaPosteo entrada = new EntradaPosteo(path, v);
-            if (posteos.containsKey(k)) {
-                ArrayList<EntradaPosteo> lista = posteos.get(k);
+            if (posteosDocumento.containsKey(k)) {
+                ArrayList<EntradaPosteo> lista = posteosDocumento.get(k);
                 lista.add(entrada);
             }
             else {
                 ArrayList<EntradaPosteo> listaEntradas = new ArrayList<>();
                 listaEntradas.add(entrada);
-                posteos.put(k, listaEntradas);
+                posteosDocumento.put(k, listaEntradas);
             }
         });
+
+        return posteosDocumento;
+
     }
 }

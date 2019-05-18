@@ -32,12 +32,8 @@ public class GestorIndexado {
 
         vocabulario.agregarDocumento(new File("C:\\DocumentosTP1\\7linc11.txt"));
 
-        Vocabulario v = Vocabulario.getInstance();
-        Hashtable<String, Termino> voc = v.getVocabulario();
-
-        /*for ()
-        String sql = "INSERT INTO Vocabulario VALUES (" +  +  ", " +  + ", " + + ", " + + ")";
-        GestorDB.statement("");*/
+        /*Vocabulario v = Vocabulario.getInstance();
+        Hashtable<String, Termino> voc = v.getVocabulario();*/
 
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
