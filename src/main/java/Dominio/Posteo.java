@@ -1,51 +1,57 @@
 package Dominio;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-
 public class Posteo {
 
-    private Hashtable<String, ArrayList<EntradaPosteo>> posteos;
-    public static Posteo instance = null;
+    private int id;
+    private int documentoId;
+    private int frecuencia;
+    private int indice;
 
-    private Posteo() {
-        this.posteos = new Hashtable<>();
+    public Posteo() {
     }
 
-    private Posteo(Hashtable<String, ArrayList<EntradaPosteo>> posteo) {
-        this.posteos = posteo;
+    public Posteo(int id, int documentoId, int frecuencia, int indice) {
+        this.id = id;
+        this.documentoId = documentoId;
+        this.frecuencia = frecuencia;
+        this.indice = indice;
     }
 
-    public static Posteo getInstance() {
-        if (instance == null)
-            instance = new Posteo();
-        return instance;
+    public Posteo(int documentoId, int frecuencia, int indice) {
+        this.documentoId = documentoId;
+        this.frecuencia = frecuencia;
+        this.indice = indice;
     }
 
-    public Hashtable<String, ArrayList<EntradaPosteo>> getPosteos() {
-        return posteos;
+    public int getId() {
+        return id;
     }
 
-    public void setPosteos(Hashtable<String, ArrayList<EntradaPosteo>> posteos) {
-        this.posteos = posteos;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Hashtable<String, ArrayList<EntradaPosteo>> indexarDocumento(Hashtable<String, Integer> parseo, String path) {
-        Hashtable<String, ArrayList<EntradaPosteo>> posteosDocumento = new Hashtable<>();
-        parseo.forEach((k, v) -> {
-            EntradaPosteo entrada = new EntradaPosteo(path, v);
-            if (posteosDocumento.containsKey(k)) {
-                ArrayList<EntradaPosteo> lista = posteosDocumento.get(k);
-                lista.add(entrada);
-            }
-            else {
-                ArrayList<EntradaPosteo> listaEntradas = new ArrayList<>();
-                listaEntradas.add(entrada);
-                posteosDocumento.put(k, listaEntradas);
-            }
-        });
+    public int getDocumentoId() {
+        return documentoId;
+    }
 
-        return posteosDocumento;
+    public void setDocumentoId(int documentoId) {
+        this.documentoId = documentoId;
+    }
 
+    public int getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(int frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 }
