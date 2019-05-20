@@ -13,9 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.*;
 
 public class GestorIndexado {
 
@@ -29,19 +27,14 @@ public class GestorIndexado {
     public void indexar() {
 
         long generalTimer = System.currentTimeMillis();
-        long timer = generalTimer;
         File carpeta = new File("C:\\DocumentosTP1");
         File[] archivos = carpeta.listFiles();
-        if (archivos != null) {
-            for (int i = 0; i < archivos.length; i++) {
-                this.agregarDocumento(archivos[i]);
-                if (System.currentTimeMillis() - timer > 10000) {
-                    System.out.println("Indexando: " + (i / (float)archivos.length) * 100 + "%");
-                    timer = System.currentTimeMillis();
-                }
-            }
-        }
-        System.out.println("Guardando vocabulario con " + vocabulario.getVocabulario().size() + " palabras...");
+        List<File> files = Arrays.asList(archivos);
+        files.parallelStream().forEach((d) -> {
+            this.agregarDocumento(d);
+        });
+
+        System.out.println("Guardando vocabulario con " + vocabulario.size() + " palabras...");
         try {
             vocabulario.write();
         } catch (VocabularioIOException e) {
@@ -64,7 +57,7 @@ public class GestorIndexado {
             Hashtable<String, Integer> documentoParseado = vocabulario.agregarDocumento(file);
             ArrayList<Posteo> posteos = new ArrayList<>();
             documentoParseado.forEach((k, v) -> {
-                posteos.add(new Posteo(docId, v, vocabulario.getVocabulario().get(k).getIndice()));
+                posteos.add(new Posteo(docId, v, vocabulario.get(k).getIndice()));
             });
             repo.addPosteos(posteos);
         } else {

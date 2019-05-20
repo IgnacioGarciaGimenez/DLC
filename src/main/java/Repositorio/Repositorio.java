@@ -73,12 +73,61 @@ public class Repositorio {
         posteos.forEach((p) -> {
             sql.append("(" + p.getDocumentoId() + ", " + p.getFrecuencia() + ", " + p.getIndice() + "), ");
         });
-
+        String sql2 = sql.substring(0, sql.length() - 2);
         try {
             Statement statement = Repositorio.connection.createStatement();
-            statement.executeUpdate(sql.substring(0, sql.length() - 2));
+            statement.executeUpdate(sql2);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getCantidadTotalDeDocs() {
+
+        String sql = "SELECT COUNT(*) FROM documento";
+        try {
+            Statement st = Repositorio.connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<DominioBusqueda.Documento> getDocumentosMasRelevantesPorTermino(ArrayList<Vocabulario.Termino> terminos, int N) {
+        StringBuilder terminosString = new StringBuilder(5000000);
+        ArrayList<DominioBusqueda.Documento> docList = new ArrayList<>();
+        for (Vocabulario.Termino t : terminos) {
+            terminosString.append(t.getIndice() + ", ");
+        }
+
+        String sql1 = terminosString.substring(0, terminosString.length() - 2);
+        String sql = "SELECT d.titulo, d.ruta, p.frecuencia, p.vocabulario_ID FROM posteo p "
+                + "INNER JOIN documento d ON p.documento_ID = d.documento_ID " +
+                "WHERE p.vocabulario_ID IN(" + sql1 + ") ORDER BY p.frecuencia DESC";
+        Statement st = null;
+        try {
+            st = Repositorio.connection.createStatement();
+            ResultSet set = st.executeQuery(sql);
+            while (set.next()) {
+                DominioBusqueda.Documento doc = new DominioBusqueda.Documento();
+                doc.setNombre(set.getString("titulo"));
+                doc.setRuta(set.getString("ruta"));
+                int indice = set.getInt("vocabulario_ID");
+                for (Vocabulario.Termino t : terminos) {
+                    if (t.getIndice() == indice){
+                        doc.calcularPeso(t.getCantDocumentos(), N, set.getInt("frecuencia"));
+                        break;
+                    }
+                }
+                docList.add(doc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return docList;
     }
 }

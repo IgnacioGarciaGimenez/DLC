@@ -6,6 +6,7 @@ public class Posteo {
     private int documentoId;
     private int frecuencia;
     private int indice;
+    private String palabra;
 
     public Posteo() {
     }
@@ -15,6 +16,7 @@ public class Posteo {
         this.documentoId = documentoId;
         this.frecuencia = frecuencia;
         this.indice = indice;
+
     }
 
     public Posteo(int documentoId, int frecuencia, int indice) {
@@ -22,6 +24,7 @@ public class Posteo {
         this.frecuencia = frecuencia;
         this.indice = indice;
     }
+
 
     public int getId() {
         return id;

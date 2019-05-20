@@ -10,19 +10,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Vocabulario implements Serializable {
 
-    private Hashtable<String, Termino> vocabulario;
+    private ConcurrentHashMap<String, Termino> vocabulario;
     private static Vocabulario instance = null;
     private static int PROV_INDICE = 0;
+    private static boolean cambio = false;
 
     private Vocabulario() {
-        this.vocabulario = new Hashtable<>();
+        this.vocabulario = new ConcurrentHashMap<>();
     }
 
     public static Vocabulario getInstance() {
@@ -36,21 +35,16 @@ public class Vocabulario implements Serializable {
             }
         }
         PROV_INDICE = instance.getVocabulario().size();
-        instance.getVocabulario().forEach((k, v) -> {
-            System.out.println("K: " + k + ", V: " + v.getCantDocumentos());
-        });
-        System.out.println(instance.getVocabulario().size());
-        System.out.println(PROV_INDICE);
-        new Scanner(System.in).nextLine();
+        System.out.println("Cantidad de palabras en el vocabulario: " + PROV_INDICE);
         return instance;
     }
 
-    public Hashtable<String, Termino> getVocabulario() {
+    private ConcurrentHashMap<String, Termino> getVocabulario() {
         return vocabulario;
     }
 
     public Hashtable<String, Integer> agregarDocumento(File file) {
-
+        cambio = true;
         LectorDocumento lector = new LectorDocumento(file);
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
 
@@ -68,11 +62,22 @@ public class Vocabulario implements Serializable {
         return documentoParseado;
     }
 
+
     public void write() throws VocabularioIOException {
-        new VocabularioWriter().write(this);
+        if (cambio)
+            new VocabularioWriter().write(this);
+        cambio = true;
     }
 
-    public class Termino implements Serializable {
+    public Termino get(String key) {
+        return this.vocabulario.get(key);
+    }
+
+    public int size() {
+        return this.vocabulario.size();
+    }
+
+    public class Termino implements Serializable, Comparable{
 
         private int cantDocumentos;
         private int maximaFrecuencia;
@@ -106,6 +111,17 @@ public class Vocabulario implements Serializable {
 
         private void setIndice(int indice) {
             this.indice = indice;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            Termino term = (Termino)o;
+            if (term.getCantDocumentos() < this.cantDocumentos)
+                return 1;
+            else if (term.getCantDocumentos() > this.cantDocumentos)
+                return -1;
+            else
+                return 0;
         }
     }
 
