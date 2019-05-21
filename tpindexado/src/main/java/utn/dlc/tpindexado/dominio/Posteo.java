@@ -1,26 +1,25 @@
 package utn.dlc.tpindexado.dominio;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Posteos")
 public class Posteo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int documentoId;
+    @Column(name = "frecuencia")
     private int frecuencia;
+    @Column(name = "indice")
     private int indice;
-    private String palabra;
+    @Column(name = "documento_ID")
+    private int documentoId;
 
     public Posteo() {
     }
 
-    public Posteo(int id, int documentoId, int frecuencia, int indice) {
-        this.id = id;
-        this.documentoId = documentoId;
-        this.frecuencia = frecuencia;
-        this.indice = indice;
-
-    }
-
-    public Posteo(int documentoId, int frecuencia, int indice) {
-        this.documentoId = documentoId;
+    public Posteo(int frecuencia, int indice) {
         this.frecuencia = frecuencia;
         this.indice = indice;
     }

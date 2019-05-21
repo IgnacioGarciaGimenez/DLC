@@ -1,7 +1,8 @@
 package utn.dlc.tpindexado.vocabularioserializacion;
 
 
-import Dominio.Vocabulario;
+import utn.dlc.tpindexado.dominio.Vocabulario;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 

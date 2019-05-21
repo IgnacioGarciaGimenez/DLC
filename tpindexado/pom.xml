@@ -25,8 +25,15 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+
+
+
+
+
     </dependencies>
   </dependencyManagement>
+
+
 
   <build>
     <finalName>tpindexado</finalName>
@@ -53,7 +60,21 @@
       <artifactId>javaee-api</artifactId>
       <version>7.0</version>
       <scope>provided</scope>
+
+
     </dependency>
-    
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.4.Final</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.13</version>
+    </dependency>
   </dependencies>
 </project>

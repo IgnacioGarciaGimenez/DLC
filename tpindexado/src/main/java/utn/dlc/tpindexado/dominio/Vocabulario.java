@@ -1,15 +1,15 @@
 package utn.dlc.tpindexado.dominio;
 
-import VocabularioSerializacion.VocabularioIOException;
-import VocabularioSerializacion.VocabularioReader;
-import VocabularioSerializacion.VocabularioWriter;
 
+import utn.dlc.tpindexado.vocabularioserializacion.VocabularioIOException;
+import utn.dlc.tpindexado.vocabularioserializacion.VocabularioReader;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.File;
 import java.io.Serializable;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -56,18 +56,18 @@ public class Vocabulario implements Serializable {
                     term.setMaximaFrecuencia(v);
             }
             else {
-                vocabulario.put(k, new Termino(1, v));
+                vocabulario.put(k, new Termino(1, v, k));
             }
         });
         return documentoParseado;
     }
 
 
-    public void write() throws VocabularioIOException {
+    /*public void write() throws VocabularioIOException {
         if (cambio)
             new VocabularioWriter().write(this);
         cambio = true;
-    }
+    }*/
 
     public Termino get(String key) {
         return this.vocabulario.get(key);
@@ -77,16 +77,37 @@ public class Vocabulario implements Serializable {
         return this.vocabulario.size();
     }
 
+    @Entity
+    @Table(name = "Terminos")
     public class Termino implements Serializable, Comparable{
 
-        private int cantDocumentos;
-        private int maximaFrecuencia;
+        @Id
+        @Column(name = "vocabulario_ID")
         private int indice;
+        @Column(name = "cantDocumentos")
+        private int cantDocumentos;
+        @Column(name = "maxFrecuencia")
+        private int maximaFrecuencia;
+        @Column(name = "termino")
+        private String palabra;
 
-        private Termino(int cantDocumentos, int maximaFrecuencia) {
+        public Termino() {
+
+        }
+
+        private Termino(int cantDocumentos, int maximaFrecuencia, String palabra) {
             this.cantDocumentos = cantDocumentos;
             this.maximaFrecuencia = maximaFrecuencia;
             this.indice = ++PROV_INDICE;
+            this.palabra = palabra;
+        }
+
+        public String getPalabra() {
+            return palabra;
+        }
+
+        public void setPalabra(String palabra) {
+            this.palabra = palabra;
         }
 
         public int getCantDocumentos() {
