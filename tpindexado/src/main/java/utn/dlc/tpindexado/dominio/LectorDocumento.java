@@ -1,4 +1,4 @@
-package Dominio;
+package utn.dlc.tpindexado.dominio;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,6 +42,7 @@ public class LectorDocumento {
                     else {
                         palabrasArchivo.put(palabra, 1);
                     }
+
                 }
             }
 
