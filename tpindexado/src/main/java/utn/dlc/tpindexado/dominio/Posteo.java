@@ -3,18 +3,20 @@ package utn.dlc.tpindexado.dominio;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Posteos")
+@Table(name = "posteos")
 public class Posteo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "posteo_ID")
     private int id;
     @Column(name = "frecuencia")
     private int frecuencia;
-    @Column(name = "indice")
+    @Column(name = "vocabulario_ID")
     private int indice;
-    @Column(name = "documento_ID")
-    private int documentoId;
+    @ManyToOne
+    @JoinColumn(name = "documento_ID")
+    private Documento documento;
 
     public Posteo() {
     }
@@ -33,12 +35,12 @@ public class Posteo {
         this.id = id;
     }
 
-    public int getDocumentoId() {
-        return documentoId;
+    public Documento getDocumento() {
+        return documento;
     }
 
-    public void setDocumentoId(int documentoId) {
-        this.documentoId = documentoId;
+    public void setDocumento(Documento documentoId) {
+        this.documento = documentoId;
     }
 
     public int getFrecuencia() {

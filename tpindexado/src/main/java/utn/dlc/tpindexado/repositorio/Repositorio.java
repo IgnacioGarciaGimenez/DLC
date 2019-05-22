@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 public class Repositorio {
 
@@ -15,23 +16,28 @@ public class Repositorio {
     private static final String USER = "root";
     private static final String PASS = "root";
 
-    private EntityManager em;
+
+
+    private static EntityManager em = Persistence.createEntityManagerFactory("IndexPU").createEntityManager();
 
     public Repositorio() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("IndexPU");
-        em = emf.createEntityManager();
     }
 
     public Documento getDocumentByName(String name) {
-        TypedQuery<Documento> q = em.createQuery("select d from Documento d where d.titulo LIKE " + name, Documento.class);
-        Documento output = q.getSingleResult();
+        Documento output = null;
+        TypedQuery<Documento> q = em.createQuery("select d from Documento d where d.titulo LIKE '" + name + "'", Documento.class);
+        try {
+            output = q.getSingleResult();
+        } catch (Exception e) {}
         return output;
     }
 
-    public void addDocumento(Documento documento) {
+    public void addDocumento(List<Documento> documento) {
 
+        System.out.println("Iniciando transaccion");
         em.getTransaction().begin();
-        em.persist(documento);
+        for (Documento doc : documento)
+            em.persist(doc);
         em.getTransaction().commit();
         /*Documento output = null;
         String insert = "INSERT INTO documento (titulo, ruta) VALUES (?, ?)";

@@ -6,6 +6,7 @@ import utn.dlc.tpindexado.dominio.Posteo;
 import utn.dlc.tpindexado.dominio.Vocabulario;
 import utn.dlc.tpindexado.repositorio.Repositorio;
 
+import javax.print.Doc;
 import java.io.File;
 import java.util.*;
 
@@ -25,10 +26,16 @@ public class GestorIndexado {
         File carpeta = new File("C:\\DocumentosTP1");
         File[] archivos = carpeta.listFiles();
         List<File> files = Arrays.asList(archivos);
-        files.parallelStream().forEach((d) -> {
-            gestor.agregarDocumento(d);
-        });
-
+        ArrayList<Documento> docs = new ArrayList<>();
+        int i = 0;
+        for (File f : files) {
+            Documento doc = gestor.agregarDocumento(f);
+            if (doc != null)
+                docs.add(doc);
+            System.out.println("Documento Id: " + ++i);
+        };
+        Repositorio repo = new Repositorio();
+        repo.addDocumento(docs);
         System.out.println("Guardando vocabulario con " + gestor.vocabulario.size() + " palabras...");
 
 
@@ -36,25 +43,28 @@ public class GestorIndexado {
 
     }
 
-    public void agregarDocumento(File file) {
+    public Documento agregarDocumento(File file) {
 
         Repositorio repo = new Repositorio();
-        Documento doc = repo.getDocumentByName(file.getName());
-        if (doc == null) {
-            doc = new Documento();
+        Documento doc2 = repo.getDocumentByName(file.getName());
+        if (doc2 == null) {
+            final Documento doc = new Documento();
             doc.setRuta(file.getAbsolutePath());
             doc.setTitulo(file.getName());
-            System.out.println("docId " + doc.getId());
 
             Hashtable<String, Integer> documentoParseado = vocabulario.agregarDocumento(file);
             ArrayList<Posteo> posteos = new ArrayList<>();
             documentoParseado.forEach((k, v) -> {
-                posteos.add(new Posteo(v, vocabulario.get(k).getIndice()));
+                Posteo p = new Posteo(v, vocabulario.get(k).getIndice());
+                p.setDocumento(doc);
+                posteos.add(p);
             });
             doc.setPosteos(posteos);
-            repo.addDocumento(doc);
+            //repo.addDocumento(doc);
+            return doc;
         } else {
             System.out.println(file.getName() + " ya agregado.");
+            return null;
         }
 
 

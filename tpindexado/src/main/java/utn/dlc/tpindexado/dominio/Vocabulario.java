@@ -78,8 +78,8 @@ public class Vocabulario implements Serializable {
     }
 
     @Entity
-    @Table(name = "Terminos")
-    public class Termino implements Serializable, Comparable{
+    @Table(name = "terminos")
+    public class Termino implements Comparable{
 
         @Id
         @Column(name = "vocabulario_ID")
@@ -95,7 +95,7 @@ public class Vocabulario implements Serializable {
 
         }
 
-        private Termino(int cantDocumentos, int maximaFrecuencia, String palabra) {
+        public Termino(int cantDocumentos, int maximaFrecuencia, String palabra) {
             this.cantDocumentos = cantDocumentos;
             this.maximaFrecuencia = maximaFrecuencia;
             this.indice = ++PROV_INDICE;
@@ -130,7 +130,7 @@ public class Vocabulario implements Serializable {
             return indice;
         }
 
-        private void setIndice(int indice) {
+        public void setIndice(int indice) {
             this.indice = indice;
         }
 

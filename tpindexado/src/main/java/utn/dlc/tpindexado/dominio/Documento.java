@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Documentos")
+@Table(name="documentos")
 public class Documento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "documento_ID")
     private int id;
     @Column
     private String titulo;
     @Column
     private String ruta;
 
-    @OneToMany(mappedBy = "documentoId")
+    @OneToMany(mappedBy = "documento", cascade = CascadeType.ALL)
     private List<Posteo> posteos;
 
     public Documento() {
