@@ -1,9 +1,5 @@
 package utn.dlc.tpindexado.dominio;
 
-
-import utn.dlc.tpindexado.vocabularioserializacion.VocabularioIOException;
-import utn.dlc.tpindexado.vocabularioserializacion.VocabularioReader;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,31 +11,26 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Vocabulario implements Serializable {
 
-    private ConcurrentHashMap<String, Termino> vocabulario;
+    private HashMap<String, Termino> vocabulario;
+    private HashMap<String, Termino> terminosModificados;
     private static Vocabulario instance = null;
     private static int PROV_INDICE = 0;
     private static boolean cambio = false;
 
     private Vocabulario() {
-        this.vocabulario = new ConcurrentHashMap<>();
+        this.vocabulario = new HashMap<>();
     }
 
     public static Vocabulario getInstance() {
         if (instance == null) {
-            System.out.println("Intenando levantar vocabulario");
-            try {
-                instance = new VocabularioReader().read();
-            } catch (VocabularioIOException e) {
-                System.out.println("No existe vocabulario, creando uno nuevo.");
-                instance = new Vocabulario();
-            }
+            instance = new Vocabulario();
         }
         PROV_INDICE = instance.getVocabulario().size();
         System.out.println("Cantidad de palabras en el vocabulario: " + PROV_INDICE);
         return instance;
     }
 
-    private ConcurrentHashMap<String, Termino> getVocabulario() {
+    public HashMap<String, Termino> getVocabulario() {
         return vocabulario;
     }
 
@@ -56,7 +47,8 @@ public class Vocabulario implements Serializable {
                     term.setMaximaFrecuencia(v);
             }
             else {
-                vocabulario.put(k, new Termino(1, v, k));
+                Termino term = new Termino(1, v, k);
+                vocabulario.put(k, term);
             }
         });
         return documentoParseado;

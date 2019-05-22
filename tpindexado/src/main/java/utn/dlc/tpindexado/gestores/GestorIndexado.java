@@ -4,39 +4,41 @@ package utn.dlc.tpindexado.gestores;
 import utn.dlc.tpindexado.dominio.Documento;
 import utn.dlc.tpindexado.dominio.Posteo;
 import utn.dlc.tpindexado.dominio.Vocabulario;
-import utn.dlc.tpindexado.repositorio.Repositorio;
+import utn.dlc.tpindexado.repositorio.RepositorioJPA;
 
-import javax.print.Doc;
+import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.File;
 import java.util.*;
 
+@Named
+@RequestScoped
 public class GestorIndexado {
 
-    public Vocabulario vocabulario;
+    private Vocabulario vocabulario;
+    @Inject
+    private IRepositorio repositorio;
 
     public GestorIndexado() {
         vocabulario = Vocabulario.getInstance();
     }
 
 
-    public static void main(String[] args) {
+    public void indexar() {
 
-        GestorIndexado gestor = new GestorIndexado();
         long generalTimer = System.currentTimeMillis();
         File carpeta = new File("C:\\DocumentosTP1");
         File[] archivos = carpeta.listFiles();
-        List<File> files = Arrays.asList(archivos);
-        ArrayList<Documento> docs = new ArrayList<>();
         int i = 0;
-        for (File f : files) {
-            Documento doc = gestor.agregarDocumento(f);
-            if (doc != null)
-                docs.add(doc);
+        for (File f : archivos) {
+            this.agregarDocumento(f);
             System.out.println("Documento Id: " + ++i);
         };
-        Repositorio repo = new Repositorio();
-        repo.addDocumento(docs);
-        System.out.println("Guardando vocabulario con " + gestor.vocabulario.size() + " palabras...");
+
+        System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
 
 
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
@@ -45,9 +47,8 @@ public class GestorIndexado {
 
     public Documento agregarDocumento(File file) {
 
-        Repositorio repo = new Repositorio();
-        Documento doc2 = repo.getDocumentByName(file.getName());
-        if (doc2 == null) {
+        Documento aux = repositorio.getDocumentoByName(file.getName());
+        if (aux == null) {
             final Documento doc = new Documento();
             doc.setRuta(file.getAbsolutePath());
             doc.setTitulo(file.getName());
@@ -59,8 +60,9 @@ public class GestorIndexado {
                 p.setDocumento(doc);
                 posteos.add(p);
             });
+
             doc.setPosteos(posteos);
-            //repo.addDocumento(doc);
+            repositorio.addDocumento(doc);
             return doc;
         } else {
             System.out.println(file.getName() + " ya agregado.");
