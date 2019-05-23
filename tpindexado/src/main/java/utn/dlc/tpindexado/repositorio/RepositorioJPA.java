@@ -2,6 +2,7 @@ package utn.dlc.tpindexado.repositorio;
 
 
 import utn.dlc.tpindexado.dominio.Documento;
+import utn.dlc.tpindexado.dominio.Termino;
 import utn.dlc.tpindexado.dominio.Vocabulario;
 import utn.dlc.tpindexado.gestores.IRepositorio;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 
-@Alternative
+
 @RequestScoped
 public class RepositorioJPA implements IRepositorio {
 
@@ -44,6 +45,7 @@ public class RepositorioJPA implements IRepositorio {
                 if (i > 0 && i % 25 == 0) {
                     transaction.commit();
                     transaction.begin();
+                    System.out.println(i);
 
                     em.clear();
                 }
@@ -59,9 +61,12 @@ public class RepositorioJPA implements IRepositorio {
 
     @Override
     public void updateVocabulario(Vocabulario vocabulario) {
-        HashMap<String, Vocabulario.Termino> actualizar = vocabulario.getTerminosModificados();
         em.getTransaction().begin();
-        actualizar.keySet().forEach((v) -> {
+        em.createQuery("delete from Termino").executeUpdate();
+        em.getTransaction().commit();
+        HashMap<String, Termino> actualizar = vocabulario.getVocabulario();
+        em.getTransaction().begin();
+        actualizar.values().forEach((v) -> {
             em.persist(v);
         });
         em.getTransaction().commit();
@@ -70,9 +75,9 @@ public class RepositorioJPA implements IRepositorio {
     @Override
     public void llenarVocabulario(Vocabulario v) {
         if (v.size() == 0) {
-            TypedQuery<Vocabulario.Termino> q = em.createQuery("select t from Termino t", Vocabulario.Termino.class);
-            List<Vocabulario.Termino> terminos = q.getResultList();
-            HashMap<String, Vocabulario.Termino> vocab = v.getVocabulario();
+            TypedQuery<Termino> q = em.createQuery("select t from Termino t", Termino.class);
+            List<Termino> terminos = q.getResultList();
+            HashMap<String, Termino> vocab = v.getVocabulario();
             terminos.forEach((t) -> {
                 vocab.put(t.getPalabra(), t);
             });

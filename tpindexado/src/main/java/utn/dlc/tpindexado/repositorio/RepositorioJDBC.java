@@ -1,15 +1,18 @@
 package utn.dlc.tpindexado.repositorio;
 
 import utn.dlc.tpindexado.dominio.Documento;
+import utn.dlc.tpindexado.dominio.Termino;
 import utn.dlc.tpindexado.dominio.Vocabulario;
 import utn.dlc.tpindexado.gestores.IRepositorio;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Alternative;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
+@Alternative
 @RequestScoped
 public class RepositorioJDBC implements IRepositorio {
 
@@ -59,9 +62,11 @@ public class RepositorioJDBC implements IRepositorio {
                 statement.setString(1, documento.getTitulo());
                 statement.setString(2, documento.getRuta());
                 statement.executeUpdate();
+
                 ResultSet res = statement.getGeneratedKeys();
                 res.next();
                 documento.setId(res.getInt(1));
+                statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -75,6 +80,7 @@ public class RepositorioJDBC implements IRepositorio {
                 Statement posteoStatement = this.connection.createStatement();
                 posteoStatement.addBatch(sql2);
                 posteoStatement.executeBatch();
+                posteoStatement.close();
                 System.out.println("Documento: " + documento.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -85,19 +91,34 @@ public class RepositorioJDBC implements IRepositorio {
 
     @Override
     public void updateVocabulario(Vocabulario vocabulario) {
+
+        System.out.println("Borrando");
+        //Borramos
+        String deleteVocabulario = "DELETE FROM terminos";
+        try {
+            Statement deleteq = connection.createStatement();
+            deleteq.execute(deleteVocabulario);
+            deleteq.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Guardando");
+        //Guardamos de nuevo
         StringBuilder sql = new StringBuilder(5000000);
         sql.append("INSERT INTO terminos (vocabulario_ID, termino, cantDocumentos, maxFrecuencia) VALUES ");
-        HashMap<String, Vocabulario.Termino> terminos = vocabulario.getTerminosModificados();
+        HashMap<String, Termino> terminos = vocabulario.getVocabulario();
         int i = 0;
-        for (Vocabulario.Termino v : terminos.values()) {
+        for (Termino v : terminos.values()) {
             if (i > 0 && i % 10000 == 0) {
                 String sql2 = sql.substring(0, sql.length()-2);
-                sql2 +=" ON DUPLICATE KEY UPDATE cantDocumentos=VALUES(cantDocumentos) , maxFrecuencia=VALUES(maxFrecuencia)" ;
+
                 Statement q = null;
                 try {
                     q = this.connection.createStatement();
                     q.addBatch(sql2);
-                    q.executeLargeBatch();
+                    q.executeBatch();
+                    q.close();
                     System.out.println(i);
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -110,18 +131,18 @@ public class RepositorioJDBC implements IRepositorio {
                     + "), ");
             i++;
         }
-
         String sql2 = sql.substring(0, sql.length()-2);
-        sql2 +=" ON DUPLICATE KEY UPDATE cantDocumentos=VALUES(cantDocumentos) , maxFrecuencia=VALUES(maxFrecuencia)" ;
         Statement q = null;
         try {
             q = this.connection.createStatement();
             q.addBatch(sql2);
-            q.executeLargeBatch();
+            q.executeBatch();
+            q.close();
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
+
 
     }
 
@@ -129,12 +150,12 @@ public class RepositorioJDBC implements IRepositorio {
     public void llenarVocabulario(Vocabulario v) {
         if (v.size() == 0) {
             String sql = "SELECT * FROM terminos";
-            HashMap<String, Vocabulario.Termino> map = v.getVocabulario();
+            HashMap<String, Termino> map = v.getVocabulario();
             try {
                 Statement q = connection.createStatement();
                 ResultSet terminos = q.executeQuery(sql);
                 while (terminos.next()) {
-                    Vocabulario.Termino t = v.new Termino(terminos.getInt("cantDocumentos"),
+                    Termino t = new Termino(terminos.getInt("cantDocumentos"),
                             terminos.getInt("maxFrecuencia"),
                             terminos.getString("termino"));
                     t.setIndice(terminos.getInt("vocabulario_ID"));

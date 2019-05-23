@@ -8,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Named
@@ -17,6 +18,7 @@ public class GestorIndexado implements IGestorIndexado{
     private Vocabulario vocabulario;
     @Inject
     private IRepositorio repositorio;
+    private static boolean indexando = false;
 
     public GestorIndexado() {
         vocabulario = Vocabulario.getInstance();
@@ -24,27 +26,36 @@ public class GestorIndexado implements IGestorIndexado{
 
 
     public void indexar() {
+        if (!indexando){
+            indexando = true;
+            repositorio.llenarVocabulario(vocabulario);
+            System.out.println("Cantidad de palabras en vocabulario: " + vocabulario.size());
+            long generalTimer = System.currentTimeMillis();
+            List<Documento> documentos = new ArrayList<>();
+            File carpeta = new File("C:\\DocumentosTP1");
+            File[] archivos = carpeta.listFiles();
+            System.out.println("Inicio de Parseo y creacion de posteos de documentos");
+            int i = 0;
+            for (File f : archivos) {
+                try {
+                    documentos.add(this.agregarDocumento(f));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Parseando documento " + ++i);
+            };
+            System.out.println("Guardando en DB los Documentos y posteos");
+            //repositorio.addDocumentos(documentos);
+            System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
+            repositorio.updateVocabulario(vocabulario);
+            System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
+            indexando = false;
+        }
 
-        repositorio.llenarVocabulario(vocabulario);
-        long generalTimer = System.currentTimeMillis();
-        List<Documento> documentos = new ArrayList<>();
-        File carpeta = new File("C:\\DocumentosTP1");
-        File[] archivos = carpeta.listFiles();
-        System.out.println("Inicio de Parseo y creacion de posteos de documentos");
-        int i = 0;
-        for (File f : archivos) {
-            documentos.add(this.agregarDocumento(f));
-            System.out.println("Parseando documento " + ++i);
-        };
-        System.out.println("Guardando en DB los Documentos y posteos");
-        repositorio.addDocumentos(documentos);
-        System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
-        repositorio.updateVocabulario(vocabulario);
-        System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
     }
 
-    private Documento agregarDocumento(File file) {
+    private Documento agregarDocumento(File file) throws IOException {
 
         Documento aux = repositorio.getDocumentoByName(file.getName());
         if (aux == null) {
