@@ -1,53 +1,69 @@
 package utn.dlc.tpbusqueda.gestores;
 
-import Dominio.Vocabulario;
-import Dominio.Vocabulario.Termino;
-import DominioBusqueda.Documento;
-import Repositorio.Repositorio;
 
+import utn.dlc.tpbusqueda.dominio.Documento;
+import utn.dlc.tpbusqueda.dominio.Vocabulario;
+import utn.dlc.tpbusqueda.dominio.Vocabulario.Termino;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
-public class GestorBusqueda {
+@Named
+@RequestScoped
+public class GestorBusqueda implements IGestorBusqueda{
 
-    private ArrayList<Termino> busqueda = new ArrayList<>();
     private int N;
     private int R = 15;
     private HashMap<String, Documento> documentos = new HashMap<>();
+    private Vocabulario vocabulario;
+    @Inject
+    private IRepository repositorio;
 
-    public GestorBusqueda(String busqueda) {
 
-        Repositorio r = new Repositorio();
-        this.N = r.getCantidadTotalDeDocs();
-        if (busqueda != null || busqueda != "") {
-            Vocabulario v = Vocabulario.getInstance();
-            for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+")) {
-                if (v.get(palabra).getCantDocumentos() > N * 0.3) continue;
-                if (!this.busqueda.contains(palabra))
-                    this.busqueda.add(v.get(palabra));
-            }
-        }
-
+    public GestorBusqueda() {
+        vocabulario = Vocabulario.getInstance();
     }
 
-    public void buscarDocumentos() {
 
-        Repositorio repo = new Repositorio();
-        ArrayList<Documento> docs = repo.getDocumentosMasRelevantesPorTermino(busqueda, N);
+
+    public List<Documento> buscar(String busqueda) {
+        repositorio.llenarVocabulario(vocabulario);
+        this.N = repositorio.getCantidadTotalDeDocs();
+        List<Termino> terminos = new ArrayList<>();
+        if (busqueda != null || busqueda != "") {
+            for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+")) {
+                if (vocabulario.get(palabra).getCantDocumentos() > N * 0.3) continue;
+                if (!terminos.contains(palabra))
+                    terminos.add(vocabulario.get(palabra));
+            }
+        }
+        this.buscarDocumentos(terminos);
+        return this.obtenerDocumentos();
+    }
+
+
+    private void buscarDocumentos(List<Termino> terminos) {
+
+        List<Documento> docs = repositorio.getDocumentosMasRelevantesPorTermino(terminos, N);
 
         for (Documento doc : docs) {
-            if (!documentos.containsKey(doc.getNombre()))
-                documentos.put(doc.getNombre(), doc);
+            if (!documentos.containsKey(doc.getTitulo()))
+                documentos.put(doc.getTitulo(), doc);
             else {
-                double peso = doc.getPeso() + documentos.get(doc.getNombre()).getPeso();
-                documentos.get(doc.getNombre()).setPeso(peso);
+                double peso = doc.getPeso() + documentos.get(doc.getTitulo()).getPeso();
+                documentos.get(doc.getTitulo()).setPeso(peso);
             }
         }
     }
 
-    public ArrayList<Documento> obtenerDocumentos() {
+    private List<Documento> obtenerDocumentos() {
 
         ArrayList<Documento> iterar = new ArrayList<>(documentos.values());
         Collections.sort(iterar);

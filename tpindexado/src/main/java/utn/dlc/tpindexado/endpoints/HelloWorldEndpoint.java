@@ -1,7 +1,7 @@
 package utn.dlc.tpindexado.endpoints;
 
 
-import utn.dlc.tpindexado.gestores.GestorIndexado;
+import utn.dlc.tpindexado.gestores.IGestorIndexado;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 public class HelloWorldEndpoint {
 
 	@Inject
-	private GestorIndexado gestor;
+	private IGestorIndexado gestor;
 
 	@GET
 	@Produces("text/plain")

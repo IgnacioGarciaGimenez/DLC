@@ -1,28 +1,50 @@
 package utn.dlc.tpbusqueda.dominio;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "documentos")
 public class Documento implements Comparable{
 
-    private String nombre;
+    @Id
+    @Column(name = "documento_ID")
+    private int id;
+
+    @Column(name = "titulo")
+    private String titulo;
+
+    @Column(name = "ruta")
     private String ruta;
     private double peso;
+
+    @OneToMany( mappedBy = "documento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Posteo> posteos;
 
     public Documento() {
         this.peso = 0.0;
     }
 
-    public Documento(String nombre, String ruta) {
-        this.nombre = nombre;
+    public Documento(String titulo, String ruta) {
+        this.titulo = titulo;
         this.ruta = ruta;
         this.peso = 0.0;
     }
 
-
-    public String getNombre() {
-        return nombre;
+    public int getId() {
+        return id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getRuta() {
@@ -44,6 +66,14 @@ public class Documento implements Comparable{
     public void calcularPeso(int n, int N, int tf)
     {
         peso += (double) tf * Math.log10((double) N / (double) n);
+    }
+
+    public List<Posteo> getPosteos() {
+        return posteos;
+    }
+
+    public void setPosteos(List<Posteo> posteos) {
+        this.posteos = posteos;
     }
 
     @Override

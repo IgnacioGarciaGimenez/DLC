@@ -4,10 +4,6 @@ package utn.dlc.tpindexado.gestores;
 import utn.dlc.tpindexado.dominio.Documento;
 import utn.dlc.tpindexado.dominio.Posteo;
 import utn.dlc.tpindexado.dominio.Vocabulario;
-import utn.dlc.tpindexado.repositorio.RepositorioJPA;
-
-import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,7 +12,7 @@ import java.util.*;
 
 @Named
 @RequestScoped
-public class GestorIndexado {
+public class GestorIndexado implements IGestorIndexado{
 
     private Vocabulario vocabulario;
     @Inject
@@ -29,23 +25,26 @@ public class GestorIndexado {
 
     public void indexar() {
 
+        repositorio.llenarVocabulario(vocabulario);
         long generalTimer = System.currentTimeMillis();
+        List<Documento> documentos = new ArrayList<>();
         File carpeta = new File("C:\\DocumentosTP1");
         File[] archivos = carpeta.listFiles();
+        System.out.println("Inicio de Parseo y creacion de posteos de documentos");
         int i = 0;
         for (File f : archivos) {
-            this.agregarDocumento(f);
-            System.out.println("Documento Id: " + ++i);
+            documentos.add(this.agregarDocumento(f));
+            System.out.println("Parseando documento " + ++i);
         };
-
+        System.out.println("Guardando en DB los Documentos y posteos");
+        repositorio.addDocumentos(documentos);
         System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
-
-
+        repositorio.updateVocabulario(vocabulario);
         System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
 
     }
 
-    public Documento agregarDocumento(File file) {
+    private Documento agregarDocumento(File file) {
 
         Documento aux = repositorio.getDocumentoByName(file.getName());
         if (aux == null) {
@@ -62,7 +61,6 @@ public class GestorIndexado {
             });
 
             doc.setPosteos(posteos);
-            repositorio.addDocumento(doc);
             return doc;
         } else {
             System.out.println(file.getName() + " ya agregado.");

@@ -1,24 +1,23 @@
 package utn.dlc.tpindexado.dominio;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.File;
-import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class Vocabulario implements Serializable {
+public class Vocabulario {
 
     private HashMap<String, Termino> vocabulario;
     private HashMap<String, Termino> terminosModificados;
     private static Vocabulario instance = null;
     private static int PROV_INDICE = 0;
-    private static boolean cambio = false;
 
     private Vocabulario() {
         this.vocabulario = new HashMap<>();
+        this.terminosModificados = new HashMap<>();
     }
 
     public static Vocabulario getInstance() {
@@ -35,7 +34,6 @@ public class Vocabulario implements Serializable {
     }
 
     public Hashtable<String, Integer> agregarDocumento(File file) {
-        cambio = true;
         LectorDocumento lector = new LectorDocumento(file);
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
 
@@ -50,16 +48,18 @@ public class Vocabulario implements Serializable {
                 Termino term = new Termino(1, v, k);
                 vocabulario.put(k, term);
             }
+            terminosModificados.put(k, vocabulario.get(k));
         });
         return documentoParseado;
     }
 
+    public HashMap<String, Termino> getTerminosModificados() {
+        return terminosModificados;
+    }
 
-    /*public void write() throws VocabularioIOException {
-        if (cambio)
-            new VocabularioWriter().write(this);
-        cambio = true;
-    }*/
+    public void setTerminosModificados(HashMap<String, Termino> terminosModificados) {
+        this.terminosModificados = terminosModificados;
+    }
 
     public Termino get(String key) {
         return this.vocabulario.get(key);
@@ -69,7 +69,7 @@ public class Vocabulario implements Serializable {
         return this.vocabulario.size();
     }
 
-    @Entity
+    @Entity(name = "Termino")
     @Table(name = "terminos")
     public class Termino implements Comparable{
 

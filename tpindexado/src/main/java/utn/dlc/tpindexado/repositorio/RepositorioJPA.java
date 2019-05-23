@@ -5,13 +5,12 @@ import utn.dlc.tpindexado.dominio.Documento;
 import utn.dlc.tpindexado.dominio.Vocabulario;
 import utn.dlc.tpindexado.gestores.IRepositorio;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.List;
 
 @Alternative
 @RequestScoped
@@ -37,24 +36,47 @@ public class RepositorioJPA implements IRepositorio {
         return output;
     }
 
-    public void addDocumento(Documento documento) {
-        em.getTransaction().begin();
-        em.persist(documento);
-        em.getTransaction().commit();
+    public void addDocumentos(List<Documento> documentos) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            for (int i = 0; i < documentos.size(); i++) {
+                if (i > 0 && i % 25 == 0) {
+                    transaction.commit();
+                    transaction.begin();
+
+                    em.clear();
+                }
+                em.persist(documentos.get(i));
+            }
+
+            em.getTransaction().commit();
+        } catch (RuntimeException ex) {
+            if (transaction.isActive())
+                transaction.rollback();
+        }
     }
 
     @Override
-    public void addVocabulario(Vocabulario vocabulario) {
+    public void updateVocabulario(Vocabulario vocabulario) {
+        HashMap<String, Vocabulario.Termino> actualizar = vocabulario.getTerminosModificados();
         em.getTransaction().begin();
-        vocabulario.getVocabulario().keySet().forEach((v) -> {
+        actualizar.keySet().forEach((v) -> {
             em.persist(v);
         });
         em.getTransaction().commit();
     }
 
     @Override
-    public Vocabulario getVocabulario() {
-        return null;
+    public void llenarVocabulario(Vocabulario v) {
+        if (v.size() == 0) {
+            TypedQuery<Vocabulario.Termino> q = em.createQuery("select t from Termino t", Vocabulario.Termino.class);
+            List<Vocabulario.Termino> terminos = q.getResultList();
+            HashMap<String, Vocabulario.Termino> vocab = v.getVocabulario();
+            terminos.forEach((t) -> {
+                vocab.put(t.getPalabra(), t);
+            });
+        }
     }
 
 
