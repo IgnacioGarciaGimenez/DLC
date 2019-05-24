@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 
-
+@Alternative
 @RequestScoped
 public class RepositorioJPA implements IRepositorio {
 

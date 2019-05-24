@@ -17,13 +17,14 @@ public class HTTPRequestSender implements IHTTPRequestSender {
 
     }
     public void sendPostRequest(String u)  {
+        System.out.println("Enviando post");
         URL url = null;
         try {
             url = new URL(u);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.connect();
-
+            con.getInputStream();
             con.disconnect();
         } catch (MalformedURLException e) {
             e.printStackTrace();

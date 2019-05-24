@@ -45,9 +45,12 @@ public class GestorIndexado implements IGestorIndexado{
                 System.out.println("Parseando documento " + ++i);
             };
             System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
-            repositorio.updateVocabulario(vocabulario);
+            if (Vocabulario.cambio) {
+                repositorio.updateVocabulario(vocabulario);
+                requestSender.sendPostRequest("http://localhost:8081/actualizar");
+
+            }
             System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
-            requestSender.sendPostRequest("http://localhost:8081/actualizar");
             indexando = false;
         }
 

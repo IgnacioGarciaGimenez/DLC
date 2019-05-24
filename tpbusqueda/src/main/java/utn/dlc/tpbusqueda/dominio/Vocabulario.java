@@ -18,6 +18,10 @@ public class Vocabulario {
         return instance;
     }
 
+    public void vaciar() {
+        vocabulario = new HashMap<>();
+    }
+
     public HashMap<String, Termino> getVocabulario() { return vocabulario; }
 
     public void put(String key, Termino value) {

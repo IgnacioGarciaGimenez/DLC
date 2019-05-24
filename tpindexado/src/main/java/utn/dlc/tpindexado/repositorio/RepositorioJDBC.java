@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
-@Alternative
+
 @RequestScoped
 public class RepositorioJDBC implements IRepositorio {
 
