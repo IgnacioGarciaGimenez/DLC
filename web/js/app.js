@@ -1,6 +1,7 @@
 var myApp = angular.module('tpApp', []);
 
 myApp.controller("tpController", function ($scope, $http) {
+
     $scope.pantallaPrincipal = true;
     $scope.busquedaActual = "";
     $scope.resultados = []
@@ -11,6 +12,10 @@ myApp.controller("tpController", function ($scope, $http) {
         if ($scope.indexando) return;
 
         $scope.indexando = true;
+
+        $http.get("http://localhost:8080/indexado").then(function(response) {
+            $scope.indexando = false;
+        });
     }
 
     $scope.buscarPagPpal = function() {
@@ -18,34 +23,11 @@ myApp.controller("tpController", function ($scope, $http) {
         $scope.buscar();
     };
 
-    $scope.buscar = function() {
+    $scope.buscar = function(consulta) {
 
-        console.log("buscando");
-        $scope.resultados = [
-            {
-                titulo: 'Ejemplo1',
-                url: 'https://www.frc.utn.edu.ar/libro1'
-            },
-            {
-                titulo: 'Ejemplo2',
-                url: 'https://www.frc.utn.edu.ar/libro2'
-            },
-            {
-                titulo: 'Ejemplo3',
-                url: 'https://www.frc.utn.edu.ar/libro3'
-            },
-            {
-                titulo: 'Ejemplo4',
-                url: 'https://www.frc.utn.edu.ar/libro4'
-            },
-            {
-                titulo: 'Ejemplo5',
-                url: 'https://www.frc.utn.edu.ar/libro5'
-            },
-            {
-                titulo: 'Ejemplo6',
-                url: 'https://www.frc.utn.edu.ar/libro6'
-            },
-        ];
+        $scope.get("http://localhost:8081/buscar", {params: {query: consulta}}).then(function(response) {
+            $scope.resultados = response.data;
+        });
+        
     };
 });
