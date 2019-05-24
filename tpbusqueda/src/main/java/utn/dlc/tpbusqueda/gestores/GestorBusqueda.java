@@ -35,9 +35,9 @@ public class GestorBusqueda implements IGestorBusqueda{
 
 
 
-    public List<Documento> buscar(String busqueda) {
-        /*if (R != 0)
-            this.R = R;*/
+    public List<Documento> buscar(String busqueda, int R, boolean peso) {
+        if (R != 0)
+            this.R = R;
         System.out.println("Cargando Vocabulario");
         repositorio.llenarVocabulario(vocabulario);
         System.out.println("Vocabulario cargado: " + vocabulario.size());
@@ -51,14 +51,14 @@ public class GestorBusqueda implements IGestorBusqueda{
                 }
 
             }
-            /*if (terminos.size() == 0) {
+            if (terminos.size() == 0) {
                 for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+"))
                      terminos.add(vocabulario.get(palabra));
-            }*/
+            }
         }
         this.buscarDocumentos(terminos);
-        /*if (peso)
-            this.ajustarPesos(terminos);*/
+        if (peso)
+            this.ajustarPesos(terminos);
         return this.obtenerDocumentos();
     }
 
@@ -91,13 +91,19 @@ public class GestorBusqueda implements IGestorBusqueda{
         return output;
     }
 
-    /*private void ajustarPesos(List<Termino> terminos){
+    private void ajustarPesos(List<Termino> terminos){
         for (Documento doc : documentos.values()) {
             System.out.println("Doc:" + doc.getTitulo());
             List<Posteo> posts = repositorio.getAllPosteosOfDocument(doc);
             doc.ajustarPeso(posts, N);
         }
-    }*/
+    }
+
+    public void actualizarVocabulario(){
+        System.out.println("Actualizando vocabulario");
+        repositorio.actualizarVocabulario(vocabulario);
+        System.out.println("Vocabulario actualizado: " + vocabulario.size());
+    }
 
 
 

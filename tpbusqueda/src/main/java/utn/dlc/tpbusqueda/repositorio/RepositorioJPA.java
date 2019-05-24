@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-@Alternative
+
 @RequestScoped
 public class RepositorioJPA implements IRepository {
 
@@ -43,7 +43,7 @@ public class RepositorioJPA implements IRepository {
             for (Termino termino : terminos) {
                 String sql = "select d.id, d.titulo, d.ruta, p.frecuencia, p.indice from Documento d join d.posteos p " +
                         "where p.indice = :indice order by p.frecuencia desc";
-                Query q = em.createQuery(sql).setMaxResults(15);
+                Query q = em.createQuery(sql).setMaxResults(R);
                 q.setParameter("indice", termino.getIndice());
                 List<Object[]> set = q.getResultList();
                 for (Object[] o : set) {
@@ -64,36 +64,6 @@ public class RepositorioJPA implements IRepository {
             return documentos;
         }
         return new ArrayList<>();
-
-
-
-        /*if (terminos.size() > 0) {
-            String sql = "select d.id, d.titulo, d.ruta, p.frecuencia, p.indice from Documento d join d.posteos p " +
-                    "where p.indice IN :indices";
-            Query q = em.createQuery(sql);
-            List<Integer> indices = new ArrayList<>();
-            for (Termino term : terminos)
-                indices.add(term.getIndice());
-            q.setParameter("indices", indices);
-            List<Object[]> set = q.getResultList();
-            List<Documento> docs = new ArrayList<>();
-            for (Object[] o : set) {
-                Documento doc = new Documento();
-                doc.setId((int)o[0]);
-                doc.setTitulo((String)o[1]);
-                doc.setRuta((String)o[2]);
-                int indice = (int)o[4];
-                for (Termino term : terminos) {
-                    if (term.getIndice() == indice) {
-                        doc.calcularPeso(term.getCantDocumentos(), cantDocs, (int)o[3]);
-                        break;
-                    }
-                }
-                docs.add(doc);
-            }
-            return docs;
-        }
-        return new ArrayList<>();*/
 
     }
 

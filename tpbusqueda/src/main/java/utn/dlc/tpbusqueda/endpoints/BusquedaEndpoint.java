@@ -20,15 +20,15 @@ public class BusquedaEndpoint {
 	@Inject
 	private IGestorBusqueda gestor;
 
-	@Path("{query}")
+	@Path("{query}/{peso}/{cantidad}")
 	@GET
 	@Produces("application/json")
-	public Response doGet(@PathParam("query") String query) {
-		List<Documento> docs = gestor.buscar(query);
-		/*if (peso == 1)
-			docs = gestor.buscar(query, R, true);
+	public Response doGet(@PathParam("query") String query, @PathParam("peso") int peso, @PathParam("cantidad") int cantidad) {
+		List<Documento> docs;
+		if (peso == 1)
+			docs = gestor.buscar(query, cantidad, true);
 		else
-			docs = gestor.buscar(query, R, false);*/
+			docs = gestor.buscar(query, cantidad, false);
 		return Response.ok(docs).build();
 	}
 }

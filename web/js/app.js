@@ -25,7 +25,7 @@ myApp.controller("tpController", function ($scope, $http) {
 
     $scope.buscar = function() {
 
-        $http.get("http://localhost:8081/buscar/query", {params: {query: $scope.busquedaActual}}).then(function(response) {
+        $http.get("http://localhost:8081/buscar/" + $scope.busquedaActual + "/0/20").then(function(response) {
             $scope.resultados = response.data;
         });
 

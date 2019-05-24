@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
-
+@Alternative
 @RequestScoped
 public class RepositorioJDBC implements IRepositorio {
 
@@ -69,9 +69,9 @@ public class RepositorioJDBC implements IRepositorio {
             e.printStackTrace();
         }
         StringBuilder sql = new StringBuilder(5000000);
-        sql.append("INSERT INTO posteos (documento_ID, frecuencia, vocabulario_ID) VALUES ");
+        sql.append("INSERT INTO posteos (documento_ID, frecuencia, vocabulario_ID, palabra) VALUES ");
         documento.getPosteos().forEach((p) -> {
-            sql.append("(" + documento.getId() + ", " + p.getFrecuencia() + ", " + p.getIndice() + "), ");
+            sql.append("(" + documento.getId() + ", " + p.getFrecuencia() + ", " + p.getIndice() + ", \"" + p.getPalabra() + "\"), ");
         });
         String sql2 = sql.substring(0, sql.length() - 2);
         try {

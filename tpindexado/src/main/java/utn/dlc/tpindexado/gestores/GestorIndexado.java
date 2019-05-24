@@ -19,6 +19,8 @@ public class GestorIndexado implements IGestorIndexado{
     @Inject
     private IRepositorio repositorio;
     private static boolean indexando = false;
+    @Inject
+    private IHTTPRequestSender requestSender;
 
     public GestorIndexado() {
         vocabulario = Vocabulario.getInstance();
@@ -45,6 +47,7 @@ public class GestorIndexado implements IGestorIndexado{
             System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
             repositorio.updateVocabulario(vocabulario);
             System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
+            requestSender.sendPostRequest("http://localhost:8081/actualizar");
             indexando = false;
         }
 
@@ -63,7 +66,7 @@ public class GestorIndexado implements IGestorIndexado{
             ArrayList<Posteo> posteos = new ArrayList<>();
             documentoParseado.forEach((k, v) -> {
                 Posteo p = new Posteo(v, vocabulario.get(k).getIndice());
-                //p.setPalabra(k);
+                p.setPalabra(k);
                 p.setDocumento(doc);
                 posteos.add(p);
             });

@@ -79,16 +79,20 @@ public class Documento implements Comparable{
         this.posteos = posteos;
     }
 
-   /* public void ajustarPeso(List<Posteo> posteos, long N) {
+    public void ajustarPeso(List<Posteo> posteos, long N) {
         if (posteos.size() > 0) {
             Vocabulario v = Vocabulario.getInstance();
             double suma = 0.0;
             for (Posteo p : posteos) {
                 suma += p.getFrecuencia() * Math.log10((double) N / (double) v.get(p.getPalabra()).getCantDocumentos());
             }
+            System.out.println("Archivo: " + titulo);
+            System.out.println("Cantidad de posteos totales: " + posteos.size());
+            System.out.println("Peso: " + peso);
+            System.out.println("Vector:" + suma);
             peso = peso / Math.sqrt(suma);
         }
-    }*/
+    }
 
     @Override
     public int compareTo(Object o) {

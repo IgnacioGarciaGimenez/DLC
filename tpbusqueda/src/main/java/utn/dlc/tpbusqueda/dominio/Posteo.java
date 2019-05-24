@@ -13,8 +13,8 @@ public class Posteo {
     private int frecuencia;
     @Column(name = "vocabulario_ID")
     private int indice;
-    /*@Column(name = "palabra")
-    private String palabra;*/
+    @Column(name = "palabra")
+    private String palabra;
 
     @ManyToOne
     @JoinColumn(name = "documento_ID")
@@ -28,13 +28,13 @@ public class Posteo {
         this.indice = indice;
     }
 
-    /*public String getPalabra() {
+    public String getPalabra() {
         return palabra;
     }
 
     public void setPalabra(String palabra) {
         this.palabra = palabra;
-    }*/
+    }
 
     public int getId() {
         return id;
