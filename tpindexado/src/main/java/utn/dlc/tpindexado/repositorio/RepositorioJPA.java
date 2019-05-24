@@ -13,13 +13,9 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 
-
+@Alternative
 @RequestScoped
 public class RepositorioJPA implements IRepositorio {
-
-    private static final String URL = "jdbc:mysql://localhost/dlc";
-    private static final String USER = "root";
-    private static final String PASS = "root";
 
 
     @Inject
@@ -37,39 +33,31 @@ public class RepositorioJPA implements IRepositorio {
         return output;
     }
 
-    public void addDocumentos(List<Documento> documentos) {
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            for (int i = 0; i < documentos.size(); i++) {
-                if (i > 0 && i % 25 == 0) {
-                    transaction.commit();
-                    transaction.begin();
-                    System.out.println(i);
+    public void addDocumentos(Documento documento) {
+        em.getTransaction().begin();
+        em.persist(documento);
+        em.getTransaction().commit();
+        em.clear();
 
-                    em.clear();
-                }
-                em.persist(documentos.get(i));
-            }
-
-            em.getTransaction().commit();
-        } catch (RuntimeException ex) {
-            if (transaction.isActive())
-                transaction.rollback();
-        }
     }
 
     @Override
     public void updateVocabulario(Vocabulario vocabulario) {
-        em.getTransaction().begin();
-        em.createQuery("delete from Termino").executeUpdate();
-        em.getTransaction().commit();
-        HashMap<String, Termino> actualizar = vocabulario.getVocabulario();
-        em.getTransaction().begin();
-        actualizar.values().forEach((v) -> {
-            em.persist(v);
-        });
-        em.getTransaction().commit();
+        if (Vocabulario.cambio) {
+            em.getTransaction().begin();
+            em.createQuery("delete from Termino").executeUpdate();
+            em.getTransaction().commit();
+            HashMap<String, Termino> actualizar = vocabulario.getVocabulario();
+            em.getTransaction().begin();
+            actualizar.values().forEach((v) -> {
+                Termino term = new Termino(v.getCantDocumentos(), v.getMaximaFrecuencia(), v.getPalabra());
+                term.setIndice(v.getIndice());
+                em.persist(term);
+            });
+            em.getTransaction().commit();
+            Vocabulario.cambio = false;
+        }
+
     }
 
     @Override

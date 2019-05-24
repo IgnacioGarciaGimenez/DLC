@@ -11,8 +11,9 @@ import java.util.*;
 public class Vocabulario {
 
     private HashMap<String, Termino> vocabulario;
-        private static Vocabulario instance = null;
+    private static Vocabulario instance = null;
     public static int PROV_INDICE = 0;
+    public static boolean cambio = false;
 
     private Vocabulario() {
         this.vocabulario = new HashMap<>();
@@ -33,7 +34,8 @@ public class Vocabulario {
         return vocabulario;
     }
 
-    public Hashtable<String, Integer> agregarDocumento(File file) throws IOException {
+    public Hashtable<String, Integer> agregarDocumento(File file) {
+        cambio = true;
         LectorDocumento lector = new LectorDocumento(file);
         Hashtable<String, Integer> documentoParseado = lector.procesarArchivo();
 

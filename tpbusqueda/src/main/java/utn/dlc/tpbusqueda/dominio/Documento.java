@@ -1,6 +1,7 @@
 package utn.dlc.tpbusqueda.dominio;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,8 @@ public class Documento implements Comparable{
 
     @Column(name = "ruta")
     private String ruta;
+
+    @Transient
     private double peso;
 
     @OneToMany( mappedBy = "documento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -63,7 +66,7 @@ public class Documento implements Comparable{
         this.peso = peso;
     }
 
-    public void calcularPeso(int n, int N, int tf)
+    public void calcularPeso(int n, long N, int tf)
     {
         peso += (double) tf * Math.log10((double) N / (double) n);
     }
@@ -75,6 +78,17 @@ public class Documento implements Comparable{
     public void setPosteos(List<Posteo> posteos) {
         this.posteos = posteos;
     }
+
+   /* public void ajustarPeso(List<Posteo> posteos, long N) {
+        if (posteos.size() > 0) {
+            Vocabulario v = Vocabulario.getInstance();
+            double suma = 0.0;
+            for (Posteo p : posteos) {
+                suma += p.getFrecuencia() * Math.log10((double) N / (double) v.get(p.getPalabra()).getCantDocumentos());
+            }
+            peso = peso / Math.sqrt(suma);
+        }
+    }*/
 
     @Override
     public int compareTo(Object o) {

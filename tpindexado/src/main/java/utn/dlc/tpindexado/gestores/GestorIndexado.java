@@ -37,15 +37,11 @@ public class GestorIndexado implements IGestorIndexado{
             System.out.println("Inicio de Parseo y creacion de posteos de documentos");
             int i = 0;
             for (File f : archivos) {
-                try {
-                    documentos.add(this.agregarDocumento(f));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Documento d = this.agregarDocumento(f);
+                if (d != null)
+                    repositorio.addDocumentos(d);
                 System.out.println("Parseando documento " + ++i);
             };
-            System.out.println("Guardando en DB los Documentos y posteos");
-            //repositorio.addDocumentos(documentos);
             System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
             repositorio.updateVocabulario(vocabulario);
             System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
@@ -55,7 +51,7 @@ public class GestorIndexado implements IGestorIndexado{
 
     }
 
-    private Documento agregarDocumento(File file) throws IOException {
+    private Documento agregarDocumento(File file) {
 
         Documento aux = repositorio.getDocumentoByName(file.getName());
         if (aux == null) {
@@ -67,6 +63,7 @@ public class GestorIndexado implements IGestorIndexado{
             ArrayList<Posteo> posteos = new ArrayList<>();
             documentoParseado.forEach((k, v) -> {
                 Posteo p = new Posteo(v, vocabulario.get(k).getIndice());
+                //p.setPalabra(k);
                 p.setDocumento(doc);
                 posteos.add(p);
             });
@@ -77,9 +74,5 @@ public class GestorIndexado implements IGestorIndexado{
             System.out.println(file.getName() + " ya agregado.");
             return null;
         }
-
-
-
-
     }
 }

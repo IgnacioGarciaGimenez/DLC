@@ -1,11 +1,13 @@
 package utn.dlc.tpbusqueda.gestores;
 
 
+import javafx.geometry.Pos;
 import utn.dlc.tpbusqueda.dominio.Documento;
+import utn.dlc.tpbusqueda.dominio.Posteo;
+import utn.dlc.tpbusqueda.dominio.Termino;
 import utn.dlc.tpbusqueda.dominio.Vocabulario;
-import utn.dlc.tpbusqueda.dominio.Vocabulario.Termino;
 
-import javax.enterprise.context.ApplicationScoped;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +21,7 @@ import java.util.List;
 @RequestScoped
 public class GestorBusqueda implements IGestorBusqueda{
 
-    private int N;
+    private long N;
     private int R = 15;
     private HashMap<String, Documento> documentos = new HashMap<>();
     private Vocabulario vocabulario;
@@ -34,24 +36,36 @@ public class GestorBusqueda implements IGestorBusqueda{
 
 
     public List<Documento> buscar(String busqueda) {
+        /*if (R != 0)
+            this.R = R;*/
+        System.out.println("Cargando Vocabulario");
         repositorio.llenarVocabulario(vocabulario);
+        System.out.println("Vocabulario cargado: " + vocabulario.size());
         this.N = repositorio.getCantidadTotalDeDocs();
         List<Termino> terminos = new ArrayList<>();
         if (busqueda != null || busqueda != "") {
             for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+")) {
-                if (vocabulario.get(palabra).getCantDocumentos() > N * 0.3) continue;
-                if (!terminos.contains(palabra))
+                if (vocabulario.get(palabra).getCantDocumentos() > N * 0.80) continue;
+                if (!terminos.contains(palabra) && vocabulario.getVocabulario().containsKey(palabra)) {
                     terminos.add(vocabulario.get(palabra));
+                }
+
             }
+            /*if (terminos.size() == 0) {
+                for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+"))
+                     terminos.add(vocabulario.get(palabra));
+            }*/
         }
         this.buscarDocumentos(terminos);
+        /*if (peso)
+            this.ajustarPesos(terminos);*/
         return this.obtenerDocumentos();
     }
 
 
     private void buscarDocumentos(List<Termino> terminos) {
 
-        List<Documento> docs = repositorio.getDocumentosMasRelevantesPorTermino(terminos, N);
+       List<Documento> docs = repositorio.getDocumentosMasRelevantesPorTermino(terminos, N, R);
 
         for (Documento doc : docs) {
             if (!documentos.containsKey(doc.getTitulo()))
@@ -61,6 +75,8 @@ public class GestorBusqueda implements IGestorBusqueda{
                 documentos.get(doc.getTitulo()).setPeso(peso);
             }
         }
+
+
     }
 
     private List<Documento> obtenerDocumentos() {
@@ -69,11 +85,19 @@ public class GestorBusqueda implements IGestorBusqueda{
         Collections.sort(iterar);
         ArrayList<Documento> output = new ArrayList<>();
         for (Documento doc : iterar) {
-            if (output.size() > 15) break;
+            if (output.size() >= R) break;
             output.add(doc);
         }
         return output;
     }
+
+    /*private void ajustarPesos(List<Termino> terminos){
+        for (Documento doc : documentos.values()) {
+            System.out.println("Doc:" + doc.getTitulo());
+            List<Posteo> posts = repositorio.getAllPosteosOfDocument(doc);
+            doc.ajustarPeso(posts, N);
+        }
+    }*/
 
 
 

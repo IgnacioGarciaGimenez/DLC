@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IRepositorio {
     Documento getDocumentoByName(String name);
-    void addDocumentos(List<Documento> documentos);
+    void addDocumentos(Documento documento);
     void updateVocabulario(Vocabulario vocabulario);
     void llenarVocabulario(Vocabulario v);
 }

@@ -2,33 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d50211d-0166-460f-9923-956fc281e7f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Termino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_6_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__mysql_mysql_connector_java_8_0_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../recursos/TPModel.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/../recursos/TPModel.mwb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../recursos/TPModel.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/../recursos/TPModel.mwb.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Documento.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Documento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Posteo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Posteo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Vocabulario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/dominio/Vocabulario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/endpoints/BusquedaEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/endpoints/BusquedaEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/gestores/GestorBusqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/gestores/GestorBusqueda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/gestores/IRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/gestores/IRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/producers/EntityManagerProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/producers/EntityManagerProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/repositorio/RepositorioJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/repositorio/RepositorioJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/repositorio/RepositorioJPA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/java/utn/dlc/tpbusqueda/repositorio/RepositorioJPA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpbusqueda/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tpbusqueda/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/IRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/IRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/tpindexado.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Vocabulario$Termino.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Posteo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Posteo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Termino.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Termino.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Vocabulario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/dominio/Vocabulario.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/gestores/GestorIndexado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/gestores/GestorIndexado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/gestores/IRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/gestores/IRepositorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/producers/EntityManagerProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/producers/EntityManagerProducer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/repositorio/RepositorioJDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/repositorio/RepositorioJDBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/repositorio/RepositorioJPA.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utn/dlc/tpindexado/repositorio/RepositorioJPA.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado-thorntail.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado-thorntail.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado.war.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado.war.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Vocabulario$Termino.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Vocabulario$Termino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Posteo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Posteo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Termino.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Termino.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Vocabulario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/dominio/Vocabulario.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/gestores/GestorIndexado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/gestores/GestorIndexado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/gestores/IRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/gestores/IRepositorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/producers/EntityManagerProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/producers/EntityManagerProducer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/repositorio/RepositorioJDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/repositorio/RepositorioJDBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/repositorio/RepositorioJPA.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tpindexado/WEB-INF/classes/utn/dlc/tpindexado/repositorio/RepositorioJPA.class" afterDir="false" />
     </list>
@@ -40,12 +66,69 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="857">
-              <caret line="157" column="32" selection-start-line="157" selection-start-column="32" selection-end-line="157" selection-end-column="32" />
+            <state relative-caret-position="85">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+              <folding>
+                <element signature="e#838#839#0" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
+                <element signature="e#896#897#0" expanded="true" />
+                <element signature="e#924#925#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+                <element signature="e#995#996#0" expanded="true" />
+                <element signature="e#1050#1051#0" expanded="true" />
+                <element signature="e#1094#1095#0" expanded="true" />
+                <element signature="e#1128#1129#0" expanded="true" />
+                <element signature="e#1161#1162#0" expanded="true" />
+                <element signature="e#1210#1211#0" expanded="true" />
+                <element signature="e#1254#1255#0" expanded="true" />
+                <element signature="e#1284#1285#0" expanded="true" />
+                <element signature="e#1313#1314#0" expanded="true" />
+                <element signature="e#1354#1355#0" expanded="true" />
+                <element signature="e#1390#1391#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="526">
+              <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Documento.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-204">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="138">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,36 +149,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="94" selection-start-line="9" selection-start-column="94" selection-end-line="9" selection-end-column="94" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#536#537#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1020" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerFactoryProducer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="31" column="86" lean-forward="true" selection-start-line="31" selection-start-column="86" selection-end-line="31" selection-end-column="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-              <folding>
-                <element signature="e#899#900#0" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#969#970#0" expanded="true" />
-                <element signature="e#1005#1006#0" expanded="true" />
+                <element signature="e#511#512#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,12 +206,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/IRepositorio.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java" />
         <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java" />
-        <option value="$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java" />
       </list>
     </option>
   </component>
@@ -136,8 +229,8 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -147,6 +240,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,12 +347,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558646526311" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558663497011" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -285,35 +378,34 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.51859957" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33260393" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" weight="0.49840087" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.37636763" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
       <window_info id="Image Layers" order="0" />
@@ -356,40 +448,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Documento.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="857">
-          <caret line="157" column="32" selection-start-line="157" selection-start-column="32" selection-end-line="157" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/endpoints/HelloWorldEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -404,60 +462,124 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/WEB-INF/beans.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/IRepositorio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Documento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1020" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerFactoryProducer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="272">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#511#512#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/producers/EntityManagerProducer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="153">
+          <caret line="9" column="94" selection-start-line="9" selection-start-column="94" selection-end-line="9" selection-end-column="94" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Vocabulario.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="-204">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJDBC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="86" lean-forward="true" selection-start-line="31" selection-start-column="86" selection-end-line="31" selection-end-column="86" />
+        <state relative-caret-position="85">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Termino.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/repositorio/RepositorioJPA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/dominio/Posteo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
           <folding>
-            <element signature="e#899#900#0" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#969#970#0" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+            <element signature="e#896#897#0" expanded="true" />
+            <element signature="e#924#925#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
+            <element signature="e#1128#1129#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1284#1285#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
+            <element signature="e#1354#1355#0" expanded="true" />
+            <element signature="e#1390#1391#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utn/dlc/tpindexado/gestores/GestorIndexado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
         </state>
       </provider>
     </entry>

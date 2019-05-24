@@ -1,8 +1,9 @@
 package utn.dlc.tpbusqueda.repositorio;
 
 import utn.dlc.tpbusqueda.dominio.Documento;
+import utn.dlc.tpbusqueda.dominio.Posteo;
+import utn.dlc.tpbusqueda.dominio.Termino;
 import utn.dlc.tpbusqueda.dominio.Vocabulario;
-import utn.dlc.tpbusqueda.dominio.Vocabulario.Termino;
 import utn.dlc.tpbusqueda.gestores.IRepository;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequestScoped
 public class RepositorioJDBC implements IRepository {
 
-    private static final String URL = "jdbc:mysql:://localhost:3306/dlc";
+    private static final String URL = "jdbc:mysql://localhost:3306/dlc";
     private static final String USER = "root";
     private static final String PASS = "root";
 
@@ -34,13 +35,13 @@ public class RepositorioJDBC implements IRepository {
     }
 
     @Override
-    public int getCantidadTotalDeDocs() {
+    public long getCantidadTotalDeDocs() {
         String sql = "SELECT COUNT(*) FROM documentos";
         try {
             Statement q = connection.createStatement();
             ResultSet res = q.executeQuery(sql);
             if (res.next()) {
-                return res.getInt(1);
+                return res.getLong(1);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -49,51 +50,76 @@ public class RepositorioJDBC implements IRepository {
     }
 
     @Override
-    public List<Documento> getDocumentosMasRelevantesPorTermino(List<Termino> terminos, int cantDocs) {
-        StringBuilder terminosString = new StringBuilder(5000000);
-        List<Documento> docList = new ArrayList<>();
-        for (Termino t : terminos) {
-            terminosString.append(t.getIndice() + ", ");
-        }
+    public List<Documento> getDocumentosMasRelevantesPorTermino(List<Termino> terminos, long cantDocs, int R) {
+        if (terminos.size() > 0) {
 
-        String sql1 = terminosString.substring(0, terminosString.length() - 2);
-        String sql = "SELECT d.documento_ID, d.titulo, d.ruta, p.frecuencia, p.vocabulario_ID FROM posteo p "
-                + "INNER JOIN documento d ON p.documento_ID = d.documento_ID " +
-                "WHERE p.vocabulario_ID IN(" + sql1 + ") ORDER BY p.frecuencia DESC";
-        Statement st = null;
-        try {
-            st = connection.createStatement();
-            ResultSet set = st.executeQuery(sql);
-            while (set.next()) {
-                Documento doc = new Documento();
-                doc.setId(set.getInt("documento_ID"));
-                doc.setTitulo(set.getString("titulo"));
-                doc.setRuta(set.getString("ruta"));
-                int indice = set.getInt("vocabulario_ID");
-                for (Termino t : terminos) {
-                    if (t.getIndice() == indice){
-                        doc.calcularPeso(t.getCantDocumentos(), cantDocs, set.getInt("frecuencia"));
-                        break;
+            List<Documento> docList = new ArrayList<>();
+            for (Termino t : terminos) {
+                String sql = "SELECT d.documento_ID, d.titulo, d.ruta, p.frecuencia, p.vocabulario_ID FROM posteos p "
+                        + "INNER JOIN documentos d ON p.documento_ID = d.documento_ID " +
+                        "WHERE p.vocabulario_ID = " + t.getIndice() + " ORDER BY p.frecuencia DESC LIMIT " + R;
+                Statement st = null;
+                try {
+                    st = connection.createStatement();
+                    ResultSet set = st.executeQuery(sql);
+                    while (set.next()) {
+                        Documento doc = new Documento();
+                        doc.setId(set.getInt("documento_ID"));
+                        doc.setTitulo(set.getString("titulo"));
+                        doc.setRuta(set.getString("ruta"));
+                        int indice = set.getInt("vocabulario_ID");
+                        for (Termino t2 : terminos) {
+                            if (t2.getIndice() == indice){
+                                doc.calcularPeso(t2.getCantDocumentos(), cantDocs, set.getInt("frecuencia"));
+                                break;
+                            }
+                        }
+                        docList.add(doc);
                     }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                docList.add(doc);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return docList;
         }
-        return docList;
+        return new ArrayList<>();
+
     }
+
+    public List<Posteo> getAllPosteosOfDocument(Documento d) {
+        if (d != null) {
+            String sql = "SELECT p.frecuencia, p.vocabulario_ID, p.palabra FROM posteos p WHERE p.documento_ID = " + d.getId();
+            try {
+                Statement q = connection.createStatement();
+                ResultSet set = q.executeQuery(sql);
+                List<Posteo> posts = new ArrayList<>();
+                while (set.next()) {
+                    Posteo p = new Posteo();
+                    p.setFrecuencia(set.getInt(1));
+                    p.setIndice(set.getInt(2));
+                    //p.setPalabra(set.getString(3));
+                    posts.add(p);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return new ArrayList<>();
+    }
+
+
+
 
     @Override
     public void llenarVocabulario(Vocabulario v) {
         if (v.size() == 0) {
             String sql = "SELECT * FROM terminos";
-            HashMap<String, Vocabulario.Termino> map = v.getVocabulario();
+            HashMap<String, Termino> map = v.getVocabulario();
             try {
                 Statement q = this.connection.createStatement();
                 ResultSet terminos = q.executeQuery(sql);
                 while (terminos.next()) {
-                    Termino t = v.new Termino();
+                    Termino t = new Termino();
                     t.setCantDocumentos(terminos.getInt("cantDocumentos"));
                     t.setMaximaFrecuencia(terminos.getInt("maxFrecuencia"));
                     t.setPalabra(terminos.getString("termino"));
@@ -110,12 +136,12 @@ public class RepositorioJDBC implements IRepository {
     @Override
     public void actualizarVocabulario(Vocabulario v) {
         String sql = "SELECT * FROM terminos";
-        HashMap<String, Vocabulario.Termino> map = v.getVocabulario();
+        HashMap<String, Termino> map = v.getVocabulario();
         try {
             Statement q = this.connection.createStatement();
             ResultSet terminos = q.executeQuery(sql);
             while (terminos.next()) {
-                Termino t = v.new Termino();
+                Termino t = new Termino();
                 t.setCantDocumentos(terminos.getInt("cantDocumentos"));
                 t.setMaximaFrecuencia(terminos.getInt("maxFrecuencia"));
                 t.setPalabra(terminos.getString("termino"));

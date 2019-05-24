@@ -18,8 +18,6 @@ public class EntityManagerProducer {
     @Produces
     @RequestScoped
     public EntityManager create(){
-        System.out.println("create");
-
         return emf.createEntityManager();
     }
 
