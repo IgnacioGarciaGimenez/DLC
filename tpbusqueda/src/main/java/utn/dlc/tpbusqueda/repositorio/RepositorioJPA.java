@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 @RequestScoped
 public class RepositorioJPA implements IRepository {
 

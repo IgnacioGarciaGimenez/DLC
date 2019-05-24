@@ -45,7 +45,7 @@ public class GestorIndexado implements IGestorIndexado{
                 System.out.println("Parseando documento " + ++i);
             };
             System.out.println("Guardando en DB los Documentos y posteos");
-            //repositorio.addDocumentos(documentos);
+            repositorio.addDocumentos(documentos);
             System.out.println("Guardando vocabulario con " + this.vocabulario.size() + " palabras...");
             repositorio.updateVocabulario(vocabulario);
             System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - generalTimer) / 1000f) + " segundos.");
