@@ -10,16 +10,16 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 
 
-@Path("/hello")
-public class HelloWorldEndpoint {
+@Path("/indexar")
+public class IndexadoEndpoint {
 
 	@Inject
 	private IGestorIndexado gestor;
 
 	@GET
-	@Produces("text/plain")
+	@Produces("application/json")
 	public Response doGet() {
 		gestor.indexar();
-		return Response.ok("Hello from Thorntail!").build();
+		return Response.ok(true).build();
 	}
 }
