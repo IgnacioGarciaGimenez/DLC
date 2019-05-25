@@ -16,13 +16,14 @@
             <!-- Principal -->
             <div ng-show="pantallaPrincipal" style="min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column">
                 <img src="img/logo.jpg" style="max-width: 200px; height: auto; margin: 20px">
-                <form ng-submit="buscarPagPpal()">
+                <form ng-submit="buscarPagPpal(true)">
                     <div style="display: flex; justify-content: center; align-items: center; flex-direction: column">
                         <div class="form-group" style="min-width: 400px">
                             <input ng-model="busquedaActual" type="text" class="form-control" id="inputBusqueda" placeholder="Ingrese su búsqueda...">
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="min-width: 120px">Buscar</button>
+                            <button type="submit" class="btn" style="min-width: 120px; background-color: #563D7C; color: white">Busqueda avanzada</button>
+                            <button type="button" ng-click="buscarPagPpal(false)" class="btn btn-success" style="min-width: 120px">Busqueda rápida</button>
                             <button ng-click="indexar()" type="button" class="btn {{indexando ? 'btn-warning' : 'btn-success'}}" style="min-width: 120px" data-toggle="tooltip" data-html="true" title="Los nuevos documentos a indexar deben estar en: C:\DocumentosTP1">{{indexando ? 'Indexando...' : 'Indexar'}}</button>
                         </div>
                     </div>
@@ -37,17 +38,23 @@
                             <img src="img/logo.jpg" style="width: 100%; height: auto">
                         </div>
                         
-                        <form ng-submit="buscar()">
+                        <form ng-submit="buscar(true)">
                             <div style="display: flex; justify-content: center; flex-direction: row">
                                 <div class="form-group" style="min-width: 400px">
                                     <input ng-model="busquedaActual" type="text" class="form-control" id="inputBusqueda" placeholder="Ingrese su búsqueda...">
                                 </div>
-                                <button type="submit" class="btn btn-success" style="margin-left: 20px; min-width: 150px; max-height: 40px">Buscar</button>
+                                <button type="submit" class="btn" style="margin-left: 20px; min-width: 150px; max-height: 40px; background-color: #563D7C; color: white">Avanzada</button>
+                                <button type="button" ng-click="buscarPagPpal(false)" class="btn btn-success" style="margin-left: 20px; min-width: 150px; max-height: 40px">Busqueda rápida</button>
                             </div>
                         </form>
                     </div>
                 </nav>
                 
+                <div ng-show="resultados.length == 0" style="margin-top: 200px; display: flex; justify-content: center; flex-direction: row">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
 
                 <div style="margin-top: 100px">
                     <div class="container">

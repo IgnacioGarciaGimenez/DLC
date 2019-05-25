@@ -1,0 +1,16 @@
+1. Ejecutar el script: recursos/Script.sql (la DB a utilizar es MySql Server,
+   si desea utilizar otra DB, deberá cambiar el driver de JDBC en ambos proyectos).
+
+2. En el proyecto 'tpindexado' existen dos implementaciones de acceso a DB:
+   - JDBC (es la más rápida)
+   - JPA (Hibernate)
+   Si desea alternar entre una u otra, cambie la anotación @Alternative en la cabecera de la clase antes de correr el proyecto.
+
+3. Correr ambos proyectos de Thorntail (indexador y buscador):
+   mvn thorntail:run
+
+4. Colocar los documentos a indexar en: C:\DocumentosTP1
+
+5. Abrir con doble click: web/index.html
+
+NOTA: no busque hasta que no finalize el primer indexado (solo el primero, con posteriores no habrá problema).

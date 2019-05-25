@@ -13,19 +13,21 @@ myApp.controller("tpController", function ($scope, $http) {
 
         $scope.indexando = true;
 
-        $http.get("http://localhost:8082/indexar").then(function(response) {
+        $http.post("http://localhost:8082/indexar").then(function(response) {
             $scope.indexando = false;
         });
     }
 
-    $scope.buscarPagPpal = function() {
+    $scope.buscarPagPpal = function(avanzado) {
         $scope.pantallaPrincipal = false;
-        $scope.buscar();
+        $scope.buscar(avanzado);
     };
 
-    $scope.buscar = function() {
+    $scope.buscar = function(avanzado) {
 
-        $http.get("http://localhost:8081/buscar/" + $scope.busquedaActual + "/0/20").then(function(response) {
+        $scope.resultados = [];
+
+        $http.get("http://localhost:8081/buscar/" + $scope.busquedaActual + "/" + (avanzado ? "1" : "0") + "/20").then(function(response) {
             $scope.resultados = response.data;
         });
 

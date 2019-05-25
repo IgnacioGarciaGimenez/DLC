@@ -1,9 +1,6 @@
 package utn.dlc.tpindexado.dominio;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -26,7 +23,7 @@ public class LectorDocumento {
         this.archivo = archivo;
     }
 
-    private void parsearArchivo() throws FileNotFoundException {
+    private void parsearArchivo() {
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader buff = new BufferedReader(fr);
@@ -45,20 +42,16 @@ public class LectorDocumento {
 
                 }
             }
-
+            fr.close();
         }
-        catch(Exception e) {
-            throw e;
+        catch(IOException e) {
+            e.printStackTrace();
         }
     }
 
     public Hashtable<String, Integer> procesarArchivo() {
         if (this.archivo != null) {
-            try {
-                this.parsearArchivo();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            this.parsearArchivo();
         }
         return this.palabrasArchivo;
     }

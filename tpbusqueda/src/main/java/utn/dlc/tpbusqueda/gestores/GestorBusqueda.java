@@ -45,17 +45,22 @@ public class GestorBusqueda implements IGestorBusqueda{
         List<Termino> terminos = new ArrayList<>();
         if (busqueda != null || busqueda != "") {
             for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+")) {
-                if (vocabulario.get(palabra).getCantDocumentos() > N * 0.80) continue;
+                Termino t = vocabulario.get(palabra);
+                if (t != null && t.getCantDocumentos() > N * 0.80) continue;
                 if (!terminos.contains(palabra) && vocabulario.getVocabulario().containsKey(palabra)) {
                     terminos.add(vocabulario.get(palabra));
                 }
 
             }
             if (terminos.size() == 0) {
-                for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+"))
-                     terminos.add(vocabulario.get(palabra));
+                for (String palabra : busqueda.toLowerCase().replaceAll("[^A-Za-z']+", " ").split("\\s+")) {
+                    Termino t2 = vocabulario.get(palabra);
+                    if (t2 != null)
+                        terminos.add(t2);
+                }
             }
         }
+        if (terminos.size() == 0) return new ArrayList<>();
         this.buscarDocumentos(terminos);
         if (peso)
             this.ajustarPesos(terminos);
