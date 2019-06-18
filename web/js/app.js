@@ -27,7 +27,7 @@ myApp.controller("tpController", function ($scope, $http) {
 
         $scope.resultados = [];
 
-        $http.get("http://localhost:8081/buscar/" + $scope.busquedaActual + "/" + (avanzado ? "1" : "0") + "/20").then(function(response) {
+        $http.get("http://localhost:8083/buscar/" + $scope.busquedaActual + "/" + (avanzado ? "1" : "0") + "/20").then(function(response) {
             $scope.resultados = response.data;
         });
 
